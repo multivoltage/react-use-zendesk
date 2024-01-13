@@ -1,0 +1,56 @@
+{
+  "name": "react-use-zendesk",
+  "author": {
+    "name": "Diego Tonini",
+    "email": "diego.tonini93@gmail.com"
+  },
+  "description": "React Zendesk integration written in typescript",
+  "license": "MIT",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/multivoltage/react-use-zendesk"
+  },
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "exports": {
+    "./provider": "./src/provider.tsx",
+    "./useZendesk": "./src/useZendesk.tsx",
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "reactjs",
+    "zendesk",
+    "zendesk-chat",
+    "zendeskjs",
+    "react-zendesk",
+    "zendesk-react",
+    "react-use-zendesk"
+  ],
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "build:old": "tsc -p .",
+    "build": "tsup",
+    "dev": "tsup src/index.ts --format esm --sourcemap --watch --dts --external react"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "@turbo/gen": "^1.11.3",
+    "@types/eslint": "^8.56.1",
+    "@types/node": "^20.10.6",
+    "@types/react": "^18.2.46",
+    "@types/react-dom": "^18.2.18",
+    "eslint": "^8.56.0",
+    "react": "^18.2.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
+  }
+}

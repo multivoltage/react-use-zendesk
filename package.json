@@ -1,17 +1,20 @@
 {
-  "name": "my-turborepo",
   "private": true,
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
+    "build:apps": "dotenv -- turbo build --filter=web --filter=docs",
+    "build:docs": "dotenv -- turbo build --filter=docs",
+    "build:library": "turbo build --filter=react-use-zendesk",
+    "dev": "dotenv -- turbo dev",
+    "dev:docs": "dotenv -- turbo dev --filter=docs --filter=react-use-zendesk",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "dotenv-cli": "^7.3.0",
     "prettier": "^3.1.1",
-    "turbo": "latest"
+    "turbo": "1.11.3"
   },
   "engines": {
     "node": ">=18"
