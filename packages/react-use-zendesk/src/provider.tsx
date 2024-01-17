@@ -23,9 +23,19 @@ export const ZendeskProvider: React.FC<
     ZendeskApi("messenger", "hide");
   }, []);
 
+  const open = React.useCallback(() => {
+    ZendeskApi("messenger", "open");
+  }, []);
+
+  const close = React.useCallback(() => {
+    ZendeskApi("messenger", "close");
+  }, []);
+
   const initialProviderValue: ZendeskContextValues = {
     show,
     hide,
+    open,
+    close,
   };
 
   return (

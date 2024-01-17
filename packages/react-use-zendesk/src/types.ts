@@ -5,6 +5,8 @@ export type ZendeskProviderProps = {
 export type ZendeskContextValues = {
   show: () => void;
   hide: () => void;
+  open: () => void;
+  close: () => void;
 };
 
 export type ZendeskMethod = "show" | "hide" | "open" | "close";

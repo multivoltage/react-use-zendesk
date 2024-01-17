@@ -32,6 +32,24 @@ export const ExampleList = () => {
         hide();
       },
     },
+    {
+      id: "messenger open",
+      title: "Open",
+      description: <div>Opens the messaging Web Widget.</div>,
+      buttonText: "Open",
+      onClick: ({ open }) => {
+        open();
+      },
+    },
+    {
+      id: "messenger close",
+      title: "Close",
+      description: <div>Closes the messaging Web Widget.</div>,
+      buttonText: "close",
+      onClick: ({ close }) => {
+        close();
+      },
+    },
   ];
   return (
     <>
