@@ -1,39 +1,45 @@
 "use client";
-import styles from "./page.module.css";
-import { ZendeskProvider } from "react-use-zendesk";
+import { ZendeskProvider, useZendesk } from "react-use-zendesk";
 import { ExampleList } from "./components/ExampleList";
 import { useState } from "react";
+import { ValuesContainer } from "./components/ValuesContainer";
+import { CallbackContainer } from "./components/CallbackContainer";
 
 export default function Page(): JSX.Element {
-  const [callbacks, setCallBacks] = useState<{ params: any; id: string }[]>([]);
+  const [callbacks, setCallBacks] = useState<
+    { params: any; id: string; key: string }[]
+  >([]);
 
   function handleOpen() {
     setCallBacks((old) => [
-      ...old,
       {
         params: arguments,
         id: "onOpen",
+        key: "onOpen" + old.length,
       },
+      ...old,
     ]);
   }
 
   function handleClose() {
     setCallBacks((old) => [
-      ...old,
       {
         params: arguments,
         id: "onClose",
+        key: "onClose" + old.length,
       },
+      ...old,
     ]);
   }
 
   function handleUnreadMessages() {
     setCallBacks((old) => [
-      ...old,
       {
         params: arguments,
         id: "onUnreadMessages",
+        key: "onUnreadMessages" + old.length,
       },
+      ...old,
     ]);
   }
 
@@ -44,21 +50,19 @@ export default function Page(): JSX.Element {
       onClose={handleClose}
       onUnreadMessages={handleUnreadMessages}
     >
-      <main className={styles.main}>
-        <div className={styles["section-grid"]}>
-          <div>
+      <main className="main">
+        <div className="section-grid">
+          <div className="example-list">
             <ExampleList />
           </div>
 
           <div>
-            {callbacks.map(({ id, params }) => {
-              return (
-                <div key={id} className={styles.callBackContainer}>
-                  <code>{id}</code> called with arguments:
-                  <pre>{JSON.stringify(params, null, 4)}</pre>
-                </div>
-              );
-            })}
+            <ValuesContainer />
+            <div className="callback-list">
+              {callbacks.map(({ id, params, key }) => {
+                return <CallbackContainer key={key} params={params} id={id} />;
+              })}
+            </div>
           </div>
         </div>
       </main>

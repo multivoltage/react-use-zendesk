@@ -1,6 +1,4 @@
 import { ZendeskContextValues, useZendesk } from "react-use-zendesk";
-import styles from "../page.module.css";
-import { useContext } from "react";
 
 export interface ExampleProps {
   id: string;
@@ -23,13 +21,13 @@ export const Example: React.FC<ExampleProps> = ({
   }
 
   return (
-    <section className={styles.section}>
-      <div className={styles.title}>{title}</div>
-      <div className={styles["row-grid"]}>
+    <section className="section">
+      <div className="title">{title}</div>
+      <div className="row-grid">
         <div>{description}</div>
 
         <div>
-          <button className={styles.button} onClick={handleClick}>
+          <button className="button" onClick={handleClick}>
             {buttonText}
           </button>
         </div>

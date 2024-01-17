@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -15,6 +17,7 @@
   --card-border-rgb: 200, 200, 200;
 
   --background-button: #a853ba;
+  --green: #57ac45
 }
 
 * {
@@ -27,6 +30,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  height: 100vh;
 }
 
 body {
@@ -40,8 +44,7 @@ body {
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  color: var(--background-button);
 }
 
 code {
@@ -49,4 +52,107 @@ code {
   overflow-wrap: break-word;
   background-color: rgb(23, 73, 77);
   font-weight: bold;
+}
+
+.example-list {
+  max-height: 100vh;
+  overflow: auto;
+}
+
+main {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 1rem;
+  height: calc(100vh - 1rem);
+  max-width: 1280px;
+}
+
+.section {
+  border-bottom: 1px solid rgb(var(--card-border-rgb));
+  width: 100%;
+  padding: 2rem;
+}
+
+.section-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-gap: 1rem;
+  gap: 1rem;
+}
+
+.row-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  gap: 1rem;
+}
+
+.button {
+  all: unset;
+  background: var(--background-button);
+  border-radius: 0.3rem;
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 200ms ease-in-out;
+  min-width: 160px;
+  text-align: center;
+}
+.button:hover {
+  transform: scale(1.2);
+}
+
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.callBackContainer {
+  padding: 2rem;
+  border: 1px solid var(--green);
+}
+.callBackContainer .title {
+  color: var(--green);
+}
+
+.valuesContainer {
+  padding: 2rem;
+  border: 1px solid purple;
+  margin-bottom: 1rem;
+}
+.valuesContainer .title {
+  color: purple;
+}
+.valuesContainer .badge {
+  font-weight: bold;
+  background-color: purple;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.callback-list {
+  max-height: 70vh;
+  overflow: scroll;
+}
+
+.zoom {
+  animation-name: example;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes example {
+  0%   {background-color: transparent;}
+  50%  {background-color: var(--green);}
+  100% {background-color: transparent;}
 }
