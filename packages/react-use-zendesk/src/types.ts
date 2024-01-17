@@ -1,5 +1,6 @@
 export type ZendeskProviderProps = {
   apiKey: string;
+  onOpen?: () => void;
 };
 
 export type ZendeskContextValues = {

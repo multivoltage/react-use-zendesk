@@ -1,4 +1,4 @@
-export function initialize(apiKey: string) {
+export function initialize(apiKey: string, onLoad: () => void) {
   if (typeof window !== "undefined" && typeof window.zE === "undefined") {
     var appendScript = function () {
       setTimeout(function () {
@@ -6,7 +6,9 @@ export function initialize(apiKey: string) {
         s.id = "ze-snippet";
         s.type = "text/javascript";
         s.async = true;
+        s.onload = onLoad;
         s.src = "https://static.zdassets.com/ekr/snippet.js?key=" + apiKey;
+
         var x = document.getElementsByTagName("script")[0];
         x?.parentNode.insertBefore(s, x);
       }, 0);

@@ -8,10 +8,17 @@ import { ZendeskApi } from "./api";
 
 export const ZendeskProvider: React.FC<
   PropsWithChildren<ZendeskProviderProps>
-> = ({ apiKey, children }) => {
+> = ({ apiKey, onOpen, children }) => {
   const isBooted = React.useRef(false);
+
+  function registerCallback() {
+    if (onOpen) {
+      ZendeskApi("messenger:on", "open", onOpen);
+    }
+  }
+
   if (!isBooted.current) {
-    initialize(apiKey);
+    initialize(apiKey, registerCallback);
     isBooted.current = true;
   }
 
