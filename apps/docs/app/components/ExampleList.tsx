@@ -1,10 +1,6 @@
 import { Example, ExampleProps } from "./Example";
 
-interface Props {
-  callbackWith: ExampleProps["callbackWith"];
-}
-
-export const ExampleList: React.FC<Props> = ({ callbackWith }) => {
+export const ExampleList: React.FC = () => {
   const examples: ExampleProps[] = [
     {
       id: "messenger show",
@@ -68,7 +64,6 @@ export const ExampleList: React.FC<Props> = ({ callbackWith }) => {
             description={description}
             onClick={onClick}
             buttonText={buttonText}
-            callbackWith={callbackWith}
           />
         );
       })}

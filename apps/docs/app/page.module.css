@@ -12,10 +12,20 @@
   border-bottom: 1px solid rgb(var(--card-border-rgb));
   width: 100%;
   padding: 2rem;
-  padding: 2rem;
 }
 
-.grid {
+.section-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-gap: 1rem;
+  gap: 1rem;
+}
+
+.row-grid {
   width: 100%;
   display: grid;
   grid-template-columns: 6fr 1fr;
@@ -45,6 +55,6 @@
 }
 
 .callBackContainer {
-  padding: 1rem;
+  padding: 2rem;
   border: 1px solid green;
 }

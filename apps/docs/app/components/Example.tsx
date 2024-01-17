@@ -8,10 +8,6 @@ export interface ExampleProps {
   description: React.ReactNode;
   buttonText: string;
   onClick: (hook: ZendeskContextValues) => void;
-  callbackWith?: {
-    callbackId: string;
-    params: IArguments;
-  };
 }
 
 export const Example: React.FC<ExampleProps> = ({
@@ -19,8 +15,6 @@ export const Example: React.FC<ExampleProps> = ({
   description,
   buttonText,
   onClick,
-  callbackWith,
-  id,
 }) => {
   const hook = useZendesk();
 
@@ -31,7 +25,7 @@ export const Example: React.FC<ExampleProps> = ({
   return (
     <section className={styles.section}>
       <div className={styles.title}>{title}</div>
-      <div className={styles.grid}>
+      <div className={styles["row-grid"]}>
         <div>{description}</div>
 
         <div>
@@ -39,12 +33,6 @@ export const Example: React.FC<ExampleProps> = ({
             {buttonText}
           </button>
         </div>
-        {callbackWith?.params && callbackWith.callbackId === id && (
-          <div className={styles.callBackContainer}>
-            callback called with arguments:
-            <pre>{JSON.stringify(callbackWith.params, null, 4)}</pre>
-          </div>
-        )}
       </div>
     </section>
   );

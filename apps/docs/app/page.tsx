@@ -3,24 +3,64 @@ import styles from "./page.module.css";
 import { ZendeskProvider } from "react-use-zendesk";
 import { ExampleList } from "./components/ExampleList";
 import { useState } from "react";
-import { ExampleProps } from "./components/Example";
 
 export default function Page(): JSX.Element {
-  const [callBack, setCallBack] = useState<ExampleProps["callbackWith"]>();
+  const [callbacks, setCallBacks] = useState<{ params: any; id: string }[]>([]);
 
   function handleOpen() {
-    setCallBack({
-      params: arguments,
-      callbackId: "messenger open",
-    });
+    setCallBacks((old) => [
+      ...old,
+      {
+        params: arguments,
+        id: "onOpen",
+      },
+    ]);
   }
+
+  function handleClose() {
+    setCallBacks((old) => [
+      ...old,
+      {
+        params: arguments,
+        id: "onClose",
+      },
+    ]);
+  }
+
+  function handleUnreadMessages() {
+    setCallBacks((old) => [
+      ...old,
+      {
+        params: arguments,
+        id: "onUnreadMessages",
+      },
+    ]);
+  }
+
   return (
     <ZendeskProvider
       apiKey={process.env.NEXT_PUBLIC_ZENDESK_API_KEY || ""}
       onOpen={handleOpen}
+      onClose={handleClose}
+      onUnreadMessages={handleUnreadMessages}
     >
       <main className={styles.main}>
-        <ExampleList callbackWith={callBack} />
+        <div className={styles["section-grid"]}>
+          <div>
+            <ExampleList />
+          </div>
+
+          <div>
+            {callbacks.map(({ id, params }) => {
+              return (
+                <div key={id} className={styles.callBackContainer}>
+                  <code>{id}</code> called with arguments:
+                  <pre>{JSON.stringify(params, null, 4)}</pre>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </main>
     </ZendeskProvider>
   );

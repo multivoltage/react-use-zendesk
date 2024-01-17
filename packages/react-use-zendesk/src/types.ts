@@ -1,6 +1,8 @@
 export type ZendeskProviderProps = {
   apiKey: string;
   onOpen?: () => void;
+  onClose?: () => void;
+  onUnreadMessages?: (count: number) => void;
 };
 
 export type ZendeskContextValues = {
@@ -10,4 +12,9 @@ export type ZendeskContextValues = {
   close: () => void;
 };
 
-export type ZendeskMethod = "show" | "hide" | "open" | "close";
+export type ZendeskMethod =
+  | "show"
+  | "hide"
+  | "open"
+  | "close"
+  | "unreadMessages";
