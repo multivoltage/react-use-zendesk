@@ -1,6 +1,10 @@
 import { Example, ExampleProps } from "./Example";
 
-export const ExampleList = () => {
+interface Props {
+  callbackWith: ExampleProps["callbackWith"];
+}
+
+export const ExampleList: React.FC<Props> = ({ callbackWith }) => {
   const examples: ExampleProps[] = [
     {
       id: "messenger show",
@@ -36,7 +40,7 @@ export const ExampleList = () => {
       id: "messenger open",
       title: "Open",
       description: <div>Opens the messaging Web Widget.</div>,
-      buttonText: "Open",
+      buttonText: "open",
       onClick: ({ open }) => {
         open();
       },
@@ -55,6 +59,7 @@ export const ExampleList = () => {
     <>
       {examples.map((example) => {
         const { title, description, onClick, buttonText, id } = example;
+
         return (
           <Example
             id={id}
@@ -63,6 +68,7 @@ export const ExampleList = () => {
             description={description}
             onClick={onClick}
             buttonText={buttonText}
+            callbackWith={callbackWith}
           />
         );
       })}
