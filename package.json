@@ -1,7 +1,6 @@
 {
   "private": true,
   "scripts": {
-    "build:apps": "dotenv -- turbo build --filter=web --filter=docs",
     "build:docs": "dotenv -- turbo build --filter=docs",
     "build:library": "turbo build --filter=react-use-zendesk",
     "dev": "dotenv -- turbo dev",
