@@ -1,7 +1,5 @@
 export function initialize(apiKey: string) {
-  var zC = window.zE;
-
-  if (typeof zC === "undefined") {
+  if (typeof window !== "undefined" && typeof window.zE === "undefined") {
     var appendScript = function () {
       setTimeout(function () {
         var s = document.createElement("script");

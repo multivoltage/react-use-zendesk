@@ -14,12 +14,7 @@
   --card-rgb: 100, 100, 100;
   --card-border-rgb: 200, 200, 200;
 
-  --glow-conic: conic-gradient(
-    from 180deg at 50% 50%,
-    #2a8af6 0deg,
-    #a853ba 180deg,
-    #e92a67 360deg
-  );
+  --background-button: #a853ba;
 }
 
 * {
@@ -47,4 +42,11 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+code {
+  color: rgb(189, 217, 215);
+  overflow-wrap: break-word;
+  background-color: rgb(23, 73, 77);
+  font-weight: bold;
 }

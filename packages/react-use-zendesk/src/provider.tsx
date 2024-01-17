@@ -4,6 +4,7 @@ import { ZendeskContext } from "./context";
 import { ZendeskContextValues, ZendeskProviderProps } from "./types";
 import { PropsWithChildren } from "react";
 import { initialize } from "./initialize";
+import { ZendeskApi } from "./api";
 
 export const ZendeskProvider: React.FC<
   PropsWithChildren<ZendeskProviderProps>
@@ -14,7 +15,18 @@ export const ZendeskProvider: React.FC<
     isBooted.current = true;
   }
 
-  const initialProviderValue: ZendeskContextValues = {};
+  const show = React.useCallback(() => {
+    ZendeskApi("messenger", "show");
+  }, []);
+
+  const hide = React.useCallback(() => {
+    ZendeskApi("messenger", "hide");
+  }, []);
+
+  const initialProviderValue: ZendeskContextValues = {
+    show,
+    hide,
+  };
 
   return (
     <ZendeskContext.Provider value={initialProviderValue}>
