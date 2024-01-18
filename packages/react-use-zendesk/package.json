@@ -11,14 +11,14 @@
     "type": "git",
     "url": "https://github.com/multivoltage/react-use-zendesk"
   },
-  "main": "dist/index.mjs",
-  "types": "dist/index.d.mts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
-    "./provider": "./src/provider.tsx",
-    "./useZendesk": "./src/useZendesk.tsx",
     ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
       "import": "./dist/index.mjs",
-      "types": "./dist/index.d.mts"
+      "browser": "./dist/index.mjs"
     }
   },
   "files": [
@@ -36,9 +36,8 @@
   ],
   "scripts": {
     "lint": "eslint . --max-warnings 0",
-    "build:old": "tsc -p .",
     "build": "tsup",
-    "dev": "tsup src/index.ts --format esm --sourcemap --watch --dts --external react"
+    "dev": "tsup src/index.ts --format cjs,esm --sourcemap --watch --dts --external react"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
@@ -52,5 +51,9 @@
     "react": "^18.2.0",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   }
 }
