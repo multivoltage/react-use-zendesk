@@ -4,7 +4,7 @@
     "name": "Diego Tonini",
     "email": "diego.tonini93@gmail.com"
   },
-  "description": "React Zendesk integration written in typescript",
+  "description": "React Zendesk Web Widget integration written in typescript",
   "license": "MIT",
   "version": "0.0.0",
   "repository": {
@@ -26,12 +26,11 @@
   ],
   "keywords": [
     "react",
-    "reactjs",
     "zendesk",
     "zendesk-chat",
-    "zendeskjs",
     "react-zendesk",
     "zendesk-react",
+    "zendesk web widget",
     "react-use-zendesk",
     "zendesk-next",
     "next-zendesk",

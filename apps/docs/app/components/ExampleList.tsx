@@ -10,10 +10,9 @@ export const ExampleList: React.FC = () => {
       title: "Show",
       description: (
         <div>
-          Displays the widget on the host page in the state it was in before it
-          was hidden. The widget is displayed by default on page load. You don't
-          need to call <code>show</code> to display the widget unless you use{" "}
-          <code>hide.</code>
+          Displays the widget. The widget is displayed by default on page load.
+          You don't need to call <code>show</code> to display the widget unless
+          you use <code>hide.</code>
         </div>
       ),
       buttonText: "show",
@@ -38,7 +37,9 @@ export const ExampleList: React.FC = () => {
     {
       id: "messenger open",
       title: "Open",
-      description: <div>Opens the messaging Web Widget.</div>,
+      description: (
+        <div>Opens the messaging Web Widget. Chat become visible</div>
+      ),
       buttonText: "open",
       onClick: ({ open }) => {
         open();
