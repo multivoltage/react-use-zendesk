@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import { createContext } from "react";
 import { ZendeskContextValues } from "./types";
 
-export const ZendeskContext = React.createContext<
-  ZendeskContextValues | undefined
->(undefined);
+export const ZendeskContext = createContext<ZendeskContextValues | undefined>(
+  undefined
+);

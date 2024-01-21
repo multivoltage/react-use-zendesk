@@ -6,9 +6,11 @@
     "dev": "dotenv -- turbo dev",
     "dev:docs": "dotenv -- turbo dev --filter=docs --filter=react-use-zendesk",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format:check": "prettier --check \"**/*.{ts,tsx,md}\"",
+    "format:fix": "prettier --chec \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "dotenv-cli": "^7.3.0",
