@@ -8,7 +8,8 @@
 * Working on NextJS/Gatsby
 
 
-## ⚠️⚠️ Web widget vs Web Widget (classic) ⚠️ ⚠️
+## ⚠️ Web widget vs Web Widget (classic) ⚠️
+
 
 This library offers API only for the new version called Web widget. 
 For more information please read [the comparison](https://support.zendesk.com/hc/en-us/articles/4429429087002-Comparing-the-Zendesk-Web-Widgets)
@@ -92,7 +93,7 @@ Library add some useful fields.
 
 | name            | type                                       | description                                                                                                                         |
 |-----------------|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| isOpen              | boolean          | the visibility status of the messenger                                                  |                             |
+| isOpen              | boolean          | the visibilty status if chat. If you call `open` after `hide` this flag will be `false`                                               |                             |
 | show            | () => void                                 | Displays the widget. The widget is displayed by default on page load. You don't need to call <code>show</code> to display the widget unless you use <code>hide.</code>     
 | hide            | () => void                                 | Hides all parts of the widget from the page. You can invoke it before or after page load.
 | open            | () => void                                 | Opens the messaging Web Widget. Chat become visible

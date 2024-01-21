@@ -10,15 +10,8 @@ export function initialize(apiKey: string, onLoad: () => void) {
         s.id = "ze-snippet";
         s.type = "text/javascript";
         s.async = true;
-        s.onload = () => {
-          debugger;
-        };
-        s.onerror = () => {
-          debugger;
-        };
-        s.onabort = () => {
-          debugger;
-        };
+        s.onload = onLoad;
+
         s.src = "https://static.zdassets.com/ekr/snippet.js?key=" + apiKey;
 
         var x = document.getElementsByTagName("script")[0];
