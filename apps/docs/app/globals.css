@@ -125,6 +125,20 @@ main {
   color: var(--green);
 }
 
+.key-container {
+  padding: 2rem;
+  border: 1px solid red;
+  margin-bottom: 1rem;
+}
+.key-container .title {
+  color: red;
+}
+.key-container input {
+  appearance: none;
+  padding: 8px;
+  width: 100%;
+}
+
 .valuesContainer {
   padding: 2rem;
   border: 1px solid purple;

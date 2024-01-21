@@ -4,8 +4,10 @@ import { ExampleList } from "./components/ExampleList";
 import { useState } from "react";
 import { ValuesContainer } from "./components/ValuesContainer";
 import { CallbackContainer } from "./components/CallbackContainer";
+import { KeyForm } from "./components/KeyForm";
 
 export default function Page(): JSX.Element {
+  const [apiKey, setApiKey] = useState("");
   const [callbacks, setCallBacks] = useState<
     { params: any; id: string; key: string }[]
   >([]);
@@ -43,9 +45,13 @@ export default function Page(): JSX.Element {
     ]);
   }
 
+  function onChangeKey(key: string) {
+    setApiKey(key);
+  }
+
   return (
     <ZendeskProvider
-      apiKey={process.env.NEXT_PUBLIC_ZENDESK_API_KEY || ""}
+      apiKey={apiKey}
       onOpen={handleOpen}
       onClose={handleClose}
       onUnreadMessages={handleUnreadMessages}
@@ -57,6 +63,7 @@ export default function Page(): JSX.Element {
           </div>
 
           <div>
+            <KeyForm onChangeKey={onChangeKey} />
             <ValuesContainer />
             <div className="callback-list">
               {callbacks.map(({ id, params, key }) => {

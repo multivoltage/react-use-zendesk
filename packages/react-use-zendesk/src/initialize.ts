@@ -1,12 +1,24 @@
 export function initialize(apiKey: string, onLoad: () => void) {
-  if (typeof window !== "undefined" && typeof window.zE === "undefined") {
+  if (
+    !!apiKey &&
+    typeof window !== "undefined" &&
+    typeof window.zE === "undefined"
+  ) {
     var appendScript = function () {
       setTimeout(function () {
         var s = document.createElement("script");
         s.id = "ze-snippet";
         s.type = "text/javascript";
         s.async = true;
-        s.onload = onLoad;
+        s.onload = () => {
+          debugger;
+        };
+        s.onerror = () => {
+          debugger;
+        };
+        s.onabort = () => {
+          debugger;
+        };
         s.src = "https://static.zdassets.com/ekr/snippet.js?key=" + apiKey;
 
         var x = document.getElementsByTagName("script")[0];
