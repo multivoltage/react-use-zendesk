@@ -6,7 +6,7 @@ interface Props {
 
 export const KeyForm: React.FC<Props> = ({ onChangeKey }) => {
   const [value, setValue] = useState<string>(
-    process.env.NEXT_PUBLIC_ZENDESK_API_KEY || ""
+    process.env.NEXT_PUBLIC_ZENDESK_API_KEY || "",
   );
   const inputRef = useRef<HTMLInputElement>(null);
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {

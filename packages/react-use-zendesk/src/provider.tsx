@@ -41,7 +41,7 @@ export const ZendeskProvider: React.FC<
       function (unreadMessages: number) {
         setUnreadMessages(unreadMessages);
         onUnreadMessages && onUnreadMessages(unreadMessages);
-      }
+      },
     );
     isRegisteredCb.current = true;
   }
@@ -82,14 +82,14 @@ export const ZendeskProvider: React.FC<
     (conversationFields: Array<ZendeskConversationField>) => {
       ZendeskApi("messenger:set", "conversationFields", conversationFields);
     },
-    []
+    [],
   );
 
   const setConversationTags = React.useCallback(
     (conversationTags: Array<string>) => {
       ZendeskApi("messenger:set", "conversationTags", conversationTags);
     },
-    []
+    [],
   );
 
   const loginUser = React.useCallback((jwtToken: string) => {
@@ -98,7 +98,7 @@ export const ZendeskProvider: React.FC<
       "loginUser",
       (callback: (token: string) => void) => {
         callback(jwtToken);
-      }
+      },
     );
   }, []);
 

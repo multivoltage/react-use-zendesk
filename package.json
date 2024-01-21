@@ -7,7 +7,7 @@
     "dev:docs": "dotenv -- turbo dev --filter=docs --filter=react-use-zendesk",
     "lint": "turbo lint",
     "format:check": "prettier --check \"**/*.{ts,tsx,md}\"",
-    "format:fix": "prettier --chec \"**/*.{ts,tsx,md}\""
+    "format:fix": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
