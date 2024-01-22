@@ -43,7 +43,7 @@ const Home = () => {
 ```
 
 ## API
-* [ZendeskProvider](#zendesk-provider)
+* [ZendeskProvider](#ZendeskProvider)
 * [useZendesk](#useZendesk)
 
 ### ZendeskProvider
