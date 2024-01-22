@@ -2,4 +2,5 @@
 module.exports = {
   reactStrictMode: false,
   output: "export",
+  basePath: "/react-use-zendesk",
 };
