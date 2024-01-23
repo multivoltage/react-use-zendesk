@@ -1,6 +1,10 @@
+const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
+
 /** @type {import('next').NextConfig} */
-module.exports = {
-  reactStrictMode: false,
-  output: "export",
-  basePath: "/react-use-zendesk",
+module.exports = (phase, { defaultConfig }) => {
+  return {
+    reactStrictMode: false,
+    output: "export",
+    basePath: phase === PHASE_DEVELOPMENT_SERVER ? "" : "/react-use-zendesk",
+  };
 };
