@@ -1,6 +1,10 @@
 <h1 align="center">react-use-zendesk</h1>
 <p align="center">React Zendesk Web Widget integration written in typescript.</p>
 
+<p align="center">
+  <img alt="version" src="https://img.shields.io/npm/v/react-use-zendesk.svg" />
+</p>
+
 ## Features
 * Web Widget api available. Please see [Zendesk docs](https://developer.zendesk.com/api-reference/widget-messaging/web/core/)
 * TypeScript support
@@ -142,3 +146,4 @@ const Home = () => {
 
 ## Examples 
 Go to [examples](https://github.com/multivoltage/react-use-zendesk/tree/main/apps/docs) to check out some integrations ( NextJS...).
+  
