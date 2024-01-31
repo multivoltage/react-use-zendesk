@@ -1,2 +1,5 @@
 # Ignore markdown:
 **/*.md
+
+# Ignore github
+.github
