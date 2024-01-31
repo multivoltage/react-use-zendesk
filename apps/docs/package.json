@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev --port 3001",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint . --max-warnings 0"
+    "start": "next start"
   },
   "dependencies": {
     "next": "^14.0.4",
@@ -16,8 +15,6 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.0.4",
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
     "@types/eslint": "^8.56.1",
     "@types/node": "^20.10.6",
     "@types/react": "^18.2.46",
