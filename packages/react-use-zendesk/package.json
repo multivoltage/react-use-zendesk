@@ -42,7 +42,7 @@
     "dev": "tsup src/index.ts --format cjs,esm --sourcemap --watch --dts --external react"
   },
   "devDependencies": {
-    "@turbo/gen": "^1.11.3",
+    "@turbo/gen": "^1.12.5",
     "@types/eslint": "^8.56.1",
     "@types/node": "^20.10.6",
     "@types/react": "^18.2.64",
