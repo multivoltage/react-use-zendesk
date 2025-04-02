@@ -55,8 +55,8 @@ export const ExampleList: React.FC = () => {
       },
     },
     {
-      id: "messenger set locale",
-      title: "Set locale",
+      id: "messenger set DE locale",
+      title: "Set DE locale",
       description: (
         <div>
           Sets the locale of the messaging Web Widget. For a list of supported
@@ -72,6 +72,26 @@ export const ExampleList: React.FC = () => {
       buttonText: "set DE locale",
       onClick: ({ setLocale }) => {
         setLocale("de");
+      },
+    },
+    {
+      id: "messenger set ES locale",
+      title: "Set ES locale",
+      description: (
+        <div>
+          Sets the locale of the messaging Web Widget. For a list of supported
+          locales and associated codes, use the following{" "}
+          <a
+            href="https://support.zendesk.com/api/v2/locales/public.json"
+            target="_blank"
+          >
+            Zendesk public REST API endpoint
+          </a>
+        </div>
+      ),
+      buttonText: "set ES locale",
+      onClick: ({ setLocale }) => {
+        setLocale("es");
       },
     },
     {
@@ -182,6 +202,26 @@ export const ExampleList: React.FC = () => {
       buttonText: `logout`,
       onClick: ({ logoutUser }) => {
         logoutUser();
+      },
+    },
+    {
+      id: "resetWidget",
+      title: "Reset",
+      description: (
+        <div>
+          This method clears all widget local state, including user data,
+          conversations, and connections. To learn more about Reset Widget see{" "}
+          <a
+            href="https://developer.zendesk.com/api-reference/widget-messaging/web/core/#reset-widget"
+            target="_blank"
+          >
+            Reset Widget
+          </a>
+        </div>
+      ),
+      buttonText: "reset",
+      onClick({ resetWidget }) {
+        resetWidget();
       },
     },
   ];

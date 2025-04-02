@@ -12,7 +12,14 @@ import { ZendeskApi } from "./api";
 
 export const ZendeskProvider: React.FC<
   PropsWithChildren<ZendeskProviderProps>
-> = ({ apiKey, onOpen, onClose, onUnreadMessages, children }) => {
+> = ({
+  apiKey,
+  onOpen,
+  onClose,
+  onUnreadMessages,
+  onResetWidget,
+  children,
+}) => {
   const isRegisteredCb = useRef(false);
 
   const [isOpen, setIsOpen] = React.useState(false);
@@ -23,11 +30,13 @@ export const ZendeskProvider: React.FC<
   const onOpenRef = useRef(onOpen);
   const onCloseRef = useRef(onClose);
   const onUnreadMessagesRef = useRef(onUnreadMessages);
+  const onResetWidgetRef = useRef(onResetWidget);
 
   useLayoutEffect(() => {
     onOpenRef.current = onOpen;
     onCloseRef.current = onClose;
     onUnreadMessagesRef.current = onUnreadMessages;
+    onResetWidgetRef.current = onResetWidget;
   });
 
   function registerCallback() {
@@ -116,6 +125,12 @@ export const ZendeskProvider: React.FC<
     ZendeskApi("messenger", "logoutUser");
   }, []);
 
+  const resetWidget = React.useCallback(() => {
+    ZendeskApi("messenger", "resetWidget", (callback: () => void) => {
+      !!onResetWidgetRef.current && onResetWidgetRef.current();
+    });
+  }, []);
+
   const initialProviderValue: ZendeskContextValues = {
     show,
     hide,
@@ -128,6 +143,7 @@ export const ZendeskProvider: React.FC<
     setConversationTags,
     loginUser,
     logoutUser,
+    resetWidget,
     isOpen,
     unreadMessages,
   };

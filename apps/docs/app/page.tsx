@@ -48,6 +48,18 @@ export default function Page(): JSX.Element {
     ]);
   }
 
+  function handleResetWidget() {
+    toast("onResetWidget callback");
+    setCallBacks((old) => [
+      {
+        params: arguments,
+        id: "onResetWidget",
+        key: "onResetWidget" + old.length,
+      },
+      ...old,
+    ]);
+  }
+
   function onChangeKey(key: string) {
     setApiKey(key);
   }
@@ -58,6 +70,7 @@ export default function Page(): JSX.Element {
       onOpen={handleOpen}
       onClose={handleClose}
       onUnreadMessages={handleUnreadMessages}
+      onResetWidget={handleResetWidget}
     >
       <main className="main">
         <div className="section-grid">

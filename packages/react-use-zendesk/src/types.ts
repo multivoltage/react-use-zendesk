@@ -3,6 +3,7 @@ export type ZendeskProviderProps = {
   onOpen?: () => void;
   onClose?: () => void;
   onUnreadMessages?: (count: number) => void;
+  onResetWidget?: () => void;
 };
 
 export type ZendeskConversationField = {
@@ -19,11 +20,12 @@ export type ZendeskContextValues = {
   setZIndex: (newZIndex: number) => void;
   setCookies: (isEnabled: boolean) => void;
   setConversationFields: (
-    conversationFields: Array<ZendeskConversationField>,
+    conversationFields: Array<ZendeskConversationField>
   ) => void;
   setConversationTags: (conversationTags: Array<string>) => void;
   loginUser: (jwtToken: string) => void;
   logoutUser: () => void;
+  resetWidget: () => void;
   isOpen: boolean;
   unreadMessages: number | undefined;
 };
@@ -40,4 +42,5 @@ export type ZendeskMethod =
   | "conversationFields"
   | "conversationTags"
   | "loginUser"
-  | "logoutUser";
+  | "logoutUser"
+  | "resetWidget";
