@@ -1,5 +1,11 @@
 # react-use-zendesk
 
+## 1.1.1
+
+### Patch Changes
+
+- 8940097: chore: update readme
+
 ## 1.1.0
 
 ### Minor Changes
