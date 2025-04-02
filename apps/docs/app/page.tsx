@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ValuesContainer } from "./components/ValuesContainer";
 import { CallbackContainer } from "./components/CallbackContainer";
 import { KeyForm } from "./components/KeyForm";
+import { toast } from "sonner";
 
 export default function Page(): JSX.Element {
   const [apiKey, setApiKey] = useState("");
@@ -13,6 +14,7 @@ export default function Page(): JSX.Element {
   >([]);
 
   function handleOpen() {
+    toast("onOpen callback");
     setCallBacks((old) => [
       {
         params: arguments,
@@ -24,6 +26,7 @@ export default function Page(): JSX.Element {
   }
 
   function handleClose() {
+    toast("onClose callback");
     setCallBacks((old) => [
       {
         params: arguments,

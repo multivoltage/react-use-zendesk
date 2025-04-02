@@ -11,7 +11,8 @@
     "next": "^15.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-use-zendesk": "*"
+    "react-use-zendesk": "*",
+    "sonner": "^2.0.3"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.0.4",

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { ZendeskContext } from "./context";
 import {
   ZendeskContextValues,
@@ -20,6 +20,16 @@ export const ZendeskProvider: React.FC<
     number | undefined
   >(undefined);
 
+  const onOpenRef = useRef(onOpen);
+  const onCloseRef = useRef(onClose);
+  const onUnreadMessagesRef = useRef(onUnreadMessages);
+
+  useLayoutEffect(() => {
+    onOpenRef.current = onOpen;
+    onCloseRef.current = onClose;
+    onUnreadMessagesRef.current = onUnreadMessages;
+  });
+
   function registerCallback() {
     if (isRegisteredCb.current) {
       return;
@@ -27,12 +37,12 @@ export const ZendeskProvider: React.FC<
 
     ZendeskApi("messenger:on", "open", function () {
       setIsOpen(true);
-      onOpen && onOpen();
+      !!onOpenRef.current && onOpenRef.current();
     });
 
     ZendeskApi("messenger:on", "close", function () {
       setIsOpen(false);
-      onClose && onClose();
+      !!onCloseRef.current && onCloseRef.current();
     });
 
     ZendeskApi(
@@ -41,7 +51,7 @@ export const ZendeskProvider: React.FC<
       function (unreadMessages: number) {
         setUnreadMessages(unreadMessages);
         onUnreadMessages && onUnreadMessages(unreadMessages);
-      },
+      }
     );
     isRegisteredCb.current = true;
   }
@@ -82,14 +92,14 @@ export const ZendeskProvider: React.FC<
     (conversationFields: Array<ZendeskConversationField>) => {
       ZendeskApi("messenger:set", "conversationFields", conversationFields);
     },
-    [],
+    []
   );
 
   const setConversationTags = React.useCallback(
     (conversationTags: Array<string>) => {
       ZendeskApi("messenger:set", "conversationTags", conversationTags);
     },
-    [],
+    []
   );
 
   const loginUser = React.useCallback((jwtToken: string) => {
@@ -98,7 +108,7 @@ export const ZendeskProvider: React.FC<
       "loginUser",
       (callback: (token: string) => void) => {
         callback(jwtToken);
-      },
+      }
     );
   }, []);
 
