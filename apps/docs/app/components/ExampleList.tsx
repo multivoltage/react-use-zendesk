@@ -217,6 +217,8 @@ export const ExampleList: React.FC = () => {
           >
             Reset Widget
           </a>
+          <br />
+          Internally the library call this method when api key changes
         </div>
       ),
       buttonText: "reset",

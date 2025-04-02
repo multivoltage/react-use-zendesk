@@ -20,7 +20,7 @@ export type ZendeskContextValues = {
   setZIndex: (newZIndex: number) => void;
   setCookies: (isEnabled: boolean) => void;
   setConversationFields: (
-    conversationFields: Array<ZendeskConversationField>
+    conversationFields: Array<ZendeskConversationField>,
   ) => void;
   setConversationTags: (conversationTags: Array<string>) => void;
   loginUser: (jwtToken: string) => void;
