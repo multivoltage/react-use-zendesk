@@ -8,7 +8,7 @@
 ## Features
 * Web Widget api available. Please see [Zendesk docs](https://developer.zendesk.com/api-reference/widget-messaging/web/core/)
 * TypeScript support
-* Only 25kb
+* Only 40kb
 * Working on NextJS/Gatsby
 
 
@@ -23,6 +23,9 @@ For more information please read [the comparison](https://support.zendesk.com/hc
 ```sh
 npm i react-use-zendesk
 ```
+
+## Example
+![](https://github.com/multivoltage/react-use-zendesk/blob/main/example.gif)
 
 ## Usage
 ```ts
@@ -40,8 +43,8 @@ const Home = () => {
   const { open, unreadMessages } = useZendesk();
 
   return <div>
-	  you have ${unreadMessages} messages!
-	 <button onClick={open}>Open chat now</button>
+    you have ${unreadMessages} messages!
+   <button onClick={open}>Open chat now</button>
   </div>;
 };
 ```
@@ -63,6 +66,7 @@ Place the `ZendeskProvider` as high as possible in your application. This will m
 | onOpen              | () => void       | triggered when the Widget opens (chat is visible). Please see `isOpen` field if you want to get chat state by hooks                                                   |     |         |
 | onClose              | () => void       | triggered when the Widget closes (chat is hidden). Please see `isOpen` field if you want to get chat state by hooks                                                      |     |         |
 | onUnreadMessages | (count; number) => void | triggered when the current number of unread messages changes. If attached, Zendesk triggers this callback after initialization. Please see `unreadMessages` field if you want to get the number by hook                         |     |         |
+| onResetWidget | () => void | Executes when the widget has been reset successfully completes                         |     |         |
 
 
 #### Example
@@ -74,10 +78,10 @@ const App = () => {
   
   return (
     <ZendeskProvider
-		apiKey={process.env.KEY || ""}
-		onOpen={handleOpen}
-		onClose={handleClose}
-		onUnreadMessages={handleUnreadMessages}
+    apiKey={process.env.KEY || ""}
+    onOpen={handleOpen}
+    onClose={handleClose}
+    onUnreadMessages={handleUnreadMessages}
     >
       <p>fake child example</p>
     </ZendeskProvider>
@@ -109,6 +113,7 @@ Library add some useful fields.
 | setConversationTags            | (conversationTags: string[]) => void                                 | Allows custom conversation tags to be set in the client to add contextual data about the conversation
 | loginUser            | (jwtToken: string) => void                                 | If your application has a login flow, or if a user needs to access the same conversation from multiple devices
 | logoutUser            | () => void                                 | Your app may have a logout function that brings users back to a login screen. In this case, revert the messaging Web Widget to a pre-login state
+| resetWidget            | () => void                                 | This method clears all widget local state, including user data, conversations, and connections.
 | isOpen            | boolean                                 | this flag indicates if chat is visible or hidden. Derivated from from `onOpen` and `onCLose`
 | unreadMessages            | number / undefined                                 | this flag indicates number of unread messages . Derivated from from `onUnreadMessages`. Before internal callback this flag is `undefined`                       |                                                                                                                                           
 
@@ -136,8 +141,8 @@ const Home = () => {
   
   return (
     <>
-	  <p>you have {unreadMessages} unread messages</p>
-	  <p>your chat is ${isOpen ? "visible" : "hidden"}</p>
+      <p>you have {unreadMessages} unread messages</p>
+      <p>your chat is ${isOpen ? "visible" : "hidden"}</p>
       <button onClick={changeLocale}>Set ES as locale</button>   
     </>
   );
