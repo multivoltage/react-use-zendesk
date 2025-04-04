@@ -24,6 +24,9 @@ For more information please read [the comparison](https://support.zendesk.com/hc
 npm i react-use-zendesk
 ```
 
+## Example
+![](https://github.com/multivoltage/react-use-zendesk/blob/main/example.gif)
+
 ## Usage
 ```ts
 
