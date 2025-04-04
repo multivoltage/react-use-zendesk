@@ -1,5 +1,11 @@
 # react-use-zendesk
 
+## 1.1.2
+
+### Patch Changes
+
+- 374e64a: chore: change example.gif
+
 ## 1.1.1
 
 ### Patch Changes
