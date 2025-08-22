@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Example, ExampleProps } from "./Example";
+import { toast } from "sonner";
 
 export const ExampleList: React.FC = () => {
   const [cookieActive, setCookieActive] = useState(true);
+  const [jwt, setJwt] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const query = event.target.value;
+    setJwt(query);
+  }
 
   const examples: ExampleProps[] = [
     {
@@ -180,13 +187,40 @@ export const ExampleList: React.FC = () => {
           same conversation from multiple devices, you can use the{" "}
           <code>loginUser</code> API.
           <br />
-          <br /> This command cannot wotk in this demo since token is{" "}
-          <code>xyz</code>
+          <br /> This command works only with a generated and valid jw token.
+          Please read
+          <br />{" "}
+          <a
+            href="https://developer.zendesk.com/documentation/conversations/messaging-platform/users/authenticating-users-your-app/#generating-a-signing-key"
+            target="_blank"
+          >
+            Authenticating users in your application
+          </a>
+          <br />
+          <br />
+          <input
+            placeholder="eyJhbGci...."
+            ref={inputRef}
+            type="text"
+            value={jwt}
+            style={{
+              width: "100%",
+              height: 30,
+            }}
+            onChange={handleChange}
+          />
         </div>
       ),
       buttonText: `login`,
       onClick: ({ loginUser }) => {
-        loginUser("xyz");
+        if (!jwt) {
+          toast.error("please type a valid jwt token");
+          return;
+        }
+        loginUser(jwt, (error) => {
+          alert(`callbak for login with jwt ${jwt}:
+            ${JSON.stringify(error, null, 2)}`);
+        });
       },
     },
     {

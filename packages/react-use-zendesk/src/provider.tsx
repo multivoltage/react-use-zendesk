@@ -2,6 +2,7 @@
 import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { ZendeskContext } from "./context";
 import {
+  LoginFailedError,
   ZendeskContextValues,
   ZendeskConversationField,
   ZendeskProviderProps,
@@ -117,15 +118,22 @@ export const ZendeskProvider: React.FC<
     [],
   );
 
-  const loginUser = React.useCallback((jwtToken: string) => {
-    ZendeskApi(
-      "messenger",
-      "loginUser",
-      (callback: (token: string) => void) => {
-        callback(jwtToken);
-      },
-    );
-  }, []);
+  const loginUser = React.useCallback(
+    (
+      jwtToken: string,
+      loginCallback?: (error: null | LoginFailedError) => void,
+    ) => {
+      ZendeskApi(
+        "messenger",
+        "loginUser",
+        (jwtTokenCb: (token: string) => void) => {
+          jwtTokenCb(jwtToken);
+        },
+        loginCallback,
+      );
+    },
+    [],
+  );
 
   const logoutUser = React.useCallback(() => {
     ZendeskApi("messenger", "logoutUser");

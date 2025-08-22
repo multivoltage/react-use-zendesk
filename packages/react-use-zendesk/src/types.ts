@@ -11,6 +11,12 @@ export type ZendeskConversationField = {
   value: string | number | boolean;
 };
 
+export type LoginFailedError = {
+  message: string;
+  reason: string;
+  type: string;
+};
+
 export type ZendeskContextValues = {
   show: () => void;
   hide: () => void;
@@ -23,7 +29,10 @@ export type ZendeskContextValues = {
     conversationFields: Array<ZendeskConversationField>,
   ) => void;
   setConversationTags: (conversationTags: Array<string>) => void;
-  loginUser: (jwtToken: string) => void;
+  loginUser: (
+    jwtToken: string,
+    loginCallback?: (error: null | LoginFailedError) => void,
+  ) => void;
   logoutUser: () => void;
   resetWidget: () => void;
   isOpen: boolean;
