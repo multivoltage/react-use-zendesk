@@ -1,5 +1,11 @@
 # react-use-zendesk
 
+## 1.2.0
+
+### Minor Changes
+
+- 67340b8: Login Callback Not Exposed for Error Handling #89
+
 ## 1.1.2
 
 ### Patch Changes
