@@ -5,8 +5,8 @@ module.exports = (phase, { defaultConfig }) => {
   return {
     reactStrictMode: false,
     output: "export",
-    basePath: process.env.NODE_ENV === "production" ? "/nome-del-tuo-repo" : "",
+    basePath: process.env.NODE_ENV === "production" ? "/react-use-zendesk" : "",
     assetPrefix:
-      process.env.NODE_ENV === "production" ? "/nome-del-tuo-repo/" : "",
+      process.env.NODE_ENV === "production" ? "/react-use-zendesk/" : "",
   };
 };
