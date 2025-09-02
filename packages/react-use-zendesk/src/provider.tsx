@@ -62,7 +62,7 @@ export const ZendeskProvider: React.FC<
         setUnreadMessages(unreadMessages);
         !!onUnreadMessagesRef.current &&
           onUnreadMessagesRef.current(unreadMessages);
-      },
+      }
     );
 
     isRegisteredCb.current = true;
@@ -108,20 +108,20 @@ export const ZendeskProvider: React.FC<
     (conversationFields: Array<ZendeskConversationField>) => {
       ZendeskApi("messenger:set", "conversationFields", conversationFields);
     },
-    [],
+    []
   );
 
   const setConversationTags = React.useCallback(
     (conversationTags: Array<string>) => {
       ZendeskApi("messenger:set", "conversationTags", conversationTags);
     },
-    [],
+    []
   );
 
   const loginUser = React.useCallback(
     (
       jwtToken: string,
-      loginCallback?: (error: null | LoginFailedError) => void,
+      loginCallback?: (error: null | LoginFailedError) => void
     ) => {
       ZendeskApi(
         "messenger",
@@ -129,10 +129,10 @@ export const ZendeskProvider: React.FC<
         (jwtTokenCb: (token: string) => void) => {
           jwtTokenCb(jwtToken);
         },
-        loginCallback,
+        loginCallback
       );
     },
-    [],
+    []
   );
 
   const logoutUser = React.useCallback(() => {
@@ -143,6 +143,10 @@ export const ZendeskProvider: React.FC<
     ZendeskApi("messenger", "resetWidget", (callback: () => void) => {
       !!onResetWidgetRef.current && onResetWidgetRef.current();
     });
+  }, []);
+
+  const useSessionAuth = React.useCallback(() => {
+    ZendeskApi("messenger", "useSessionAuth");
   }, []);
 
   const initialProviderValue: ZendeskContextValues = {
@@ -158,6 +162,7 @@ export const ZendeskProvider: React.FC<
     loginUser,
     logoutUser,
     resetWidget,
+    useSessionAuth,
     isOpen,
     unreadMessages,
   };

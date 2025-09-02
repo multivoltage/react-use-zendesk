@@ -260,6 +260,26 @@ export const ExampleList: React.FC = () => {
         resetWidget();
       },
     },
+    {
+      id: "useSessionAuth",
+      title: "useSessionAuth",
+      buttonText: "useSessionAuth",
+      description: (
+        <div>
+          For use when the Web Widget is embedded in a Zendesk help center. To
+          learn more about Reset Widget see{" "}
+          <a
+            href="https://developer.zendesk.com/api-reference/widget-messaging/web/authentication/#use-session-auth"
+            target="_blank"
+          >
+            useSessionAuth
+          </a>
+        </div>
+      ),
+      onClick({ useSessionAuth }) {
+        useSessionAuth();
+      },
+    },
   ];
   return (
     <>
