@@ -1,5 +1,11 @@
 # react-use-zendesk
 
+## 1.3.0
+
+### Minor Changes
+
+- 9009048: add useSessionAuth method
+
 ## 1.2.0
 
 ### Minor Changes
