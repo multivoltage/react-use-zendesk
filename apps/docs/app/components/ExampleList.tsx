@@ -261,6 +261,29 @@ export const ExampleList: React.FC = () => {
       },
     },
     {
+      id: "setCustomize",
+      title: "Set Customize",
+      description: (
+        <div>
+          Dynamically updates the Web Widget Messenger’s color theme so it aligns with your brand or site theme.{" "}
+          <a
+            href="https://developer.zendesk.com/api-reference/widget-messaging/web/core/#set-customize"
+            target="_blank"
+          >
+            Set Customize
+          </a>
+
+        </div>
+      ),
+      buttonText: "customize",
+      onClick({ setCustomize }) {
+        setCustomize({
+          primary: "#DB5F46",
+          background: "#518e37ff"
+        });
+      },
+    },
+    {
       id: "useSessionAuth",
       title: "useSessionAuth",
       buttonText: "useSessionAuth",

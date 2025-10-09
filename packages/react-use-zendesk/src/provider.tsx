@@ -5,6 +5,7 @@ import {
   LoginFailedError,
   ZendeskContextValues,
   ZendeskConversationField,
+  ZendeskCustomizationTheme,
   ZendeskProviderProps,
 } from "./types";
 import { PropsWithChildren } from "react";
@@ -145,6 +146,12 @@ export const ZendeskProvider: React.FC<
     });
   }, []);
 
+  const setCustomize = React.useCallback((theme: Partial<ZendeskCustomizationTheme>) => {
+    ZendeskApi("messenger:set", "customization", {
+      theme
+    });
+  }, []);
+
   const useSessionAuth = React.useCallback(() => {
     ZendeskApi("messenger", "useSessionAuth");
   }, []);
@@ -162,6 +169,7 @@ export const ZendeskProvider: React.FC<
     loginUser,
     logoutUser,
     resetWidget,
+    setCustomize,
     useSessionAuth,
     isOpen,
     unreadMessages,

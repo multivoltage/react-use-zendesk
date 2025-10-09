@@ -115,6 +115,7 @@ Library add some useful fields.
 | useSessionAuth | () => void | See details on [Zendesk docs](https://developer.zendesk.com/api-reference/widget-messaging/web/authentication/).
 | logoutUser            | () => void                                 | Your app may have a logout function that brings users back to a login screen. In this case, revert the messaging Web Widget to a pre-login state
 | resetWidget            | () => void                                 | This method clears all widget local state, including user data, conversations, and connections.
+| setCustomize | (theme: Partial<ZendeskCustomizationTheme>) => void | Dynamically updates the Web Widget Messenger’s color theme so it aligns with your brand or site theme.
 | isOpen            | boolean                                 | this flag indicates if chat is visible or hidden. Derivated from from `onOpen` and `onCLose`
 | unreadMessages            | number / undefined                                 | this flag indicates number of unread messages . Derivated from from `onUnreadMessages`. Before internal callback this flag is `undefined`                       |                                                                                                                                           
 

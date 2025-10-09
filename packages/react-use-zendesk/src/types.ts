@@ -17,6 +17,24 @@ export type LoginFailedError = {
   type: string;
 };
 
+export type ZendeskCustomizationTheme = {
+  primary: string;
+  onPrimary: string;
+  message: string;
+  onMessage: string;
+  action: string;
+  onAction: string;
+  businessMessage: string;
+  onBusinessMessage: string;
+  background: string;
+  onBackground: string;
+  error: string;
+  onError: string;
+  notify: string;
+  onNotify: string
+  onSecondaryAction: string;
+}
+
 export type ZendeskContextValues = {
   show: () => void;
   hide: () => void;
@@ -35,6 +53,7 @@ export type ZendeskContextValues = {
   ) => void;
   logoutUser: () => void;
   resetWidget: () => void;
+  setCustomize: (theme: Partial<ZendeskCustomizationTheme>) => void;
   useSessionAuth: () => void;
   isOpen: boolean;
   unreadMessages: number | undefined;
@@ -54,4 +73,5 @@ export type ZendeskMethod =
   | "loginUser"
   | "logoutUser"
   | "resetWidget"
-  | "useSessionAuth";
+  | "customization"
+  | "useSessionAuth"
