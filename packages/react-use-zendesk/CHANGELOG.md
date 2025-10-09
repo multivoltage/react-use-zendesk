@@ -1,5 +1,11 @@
 # react-use-zendesk
 
+## 1.4.0
+
+### Minor Changes
+
+- 6ce61df: add setCustomize method
+
 ## 1.3.0
 
 ### Minor Changes
