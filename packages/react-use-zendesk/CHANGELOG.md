@@ -1,5 +1,11 @@
 # react-use-zendesk
 
+## 1.5.0
+
+### Minor Changes
+
+- e595001: add messenger:ui/newConversation method
+
 ## 1.4.1
 
 ### Patch Changes
