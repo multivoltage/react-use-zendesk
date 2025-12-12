@@ -265,21 +265,59 @@ export const ExampleList: React.FC = () => {
       title: "Set Customize",
       description: (
         <div>
-          Dynamically updates the Web Widget Messenger’s color theme so it aligns with your brand or site theme.{" "}
+          Dynamically updates the Web Widget Messenger’s color theme so it
+          aligns with your brand or site theme.{" "}
           <a
-            href="https://developer.zendesk.com/api-reference/widget-messaging/web/core/#set-customize"
+            href="https://developer.zendesk.com/api-reference/widget-messaging/web/core/#set-customization"
             target="_blank"
           >
             Set Customize
           </a>
-
         </div>
       ),
       buttonText: "customize",
       onClick({ setCustomize }) {
         setCustomize({
           primary: "#DB5F46",
-          background: "#518e37ff"
+          background: "#518e37ff",
+        });
+      },
+    },
+    {
+      id: "newConversation",
+      title: "Create New Conversation",
+      description: (
+        <div>
+          Creates a new conversation with options to customize the display name,
+          icon, and metadata. Once created, the conversation is immediately
+          loaded into the message log.
+          <a
+            href="https://developer.zendesk.com/api-reference/widget-messaging/web/core/#create-new-conversation"
+            target="_blank"
+          >
+            Create New Conversation
+          </a>
+          <br />
+          <br />
+          You have to enable "multi conversation" in the widget settings for
+          this to work. The example run with:
+          <br />
+          <br />
+          <br />- displayName: "Support Request custom"
+          <br />- iconUrl: "Custom italian flag"
+          <br />- metadata: priority: "high", orderId: 12345
+        </div>
+      ),
+      buttonText: "Create Conversation",
+      onClick({ newConversation }) {
+        newConversation({
+          displayName: "Support Request custom",
+          iconUrl:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/1599px-Flag_of_Italy.svg.png",
+          metadata: {
+            priority: "high",
+            orderId: 12345,
+          },
         });
       },
     },
