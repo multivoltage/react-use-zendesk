@@ -1,7 +1,7 @@
 import { ZendeskMethod } from "./types";
 import { isSSR } from "./utils";
 
-type Scope = "messenger" | "messenger:on" | "messenger:set";
+type Scope = "messenger" | "messenger:on" | "messenger:set" | "messenger:ui";
 export const ZendeskApi = (
   scope: Scope,
   method: ZendeskMethod,

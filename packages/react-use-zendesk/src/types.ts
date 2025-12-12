@@ -31,9 +31,15 @@ export type ZendeskCustomizationTheme = {
   error: string;
   onError: string;
   notify: string;
-  onNotify: string
+  onNotify: string;
   onSecondaryAction: string;
-}
+};
+
+export type ZendeskConversationOptions = {
+  displayName: string;
+  iconUrl: string;
+  metadata: object;
+};
 
 export type ZendeskContextValues = {
   show: () => void;
@@ -44,16 +50,19 @@ export type ZendeskContextValues = {
   setZIndex: (newZIndex: number) => void;
   setCookies: (isEnabled: boolean) => void;
   setConversationFields: (
-    conversationFields: Array<ZendeskConversationField>
+    conversationFields: Array<ZendeskConversationField>,
   ) => void;
   setConversationTags: (conversationTags: Array<string>) => void;
   loginUser: (
     jwtToken: string,
-    loginCallback?: (error: null | LoginFailedError) => void
+    loginCallback?: (error: null | LoginFailedError) => void,
   ) => void;
   logoutUser: () => void;
   resetWidget: () => void;
   setCustomize: (theme: Partial<ZendeskCustomizationTheme>) => void;
+  newConversation: (
+    conversationOptions?: Partial<ZendeskConversationOptions>,
+  ) => void;
   useSessionAuth: () => void;
   isOpen: boolean;
   unreadMessages: number | undefined;
@@ -75,3 +84,4 @@ export type ZendeskMethod =
   | "resetWidget"
   | "customization"
   | "useSessionAuth"
+  | "newConversation";
