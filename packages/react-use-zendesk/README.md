@@ -67,14 +67,19 @@ Place the `ZendeskProvider` as high as possible in your application. This will m
 | onClose              | (e: EventMessagingOpenedClosed) => void       | triggered when the Widget closes (chat is hidden). Please see `isOpen` field if you want to get chat state by hooks                                                      |     |         |
 | onUnreadMessages | (count; number) => void | triggered when the current number of unread messages changes. If attached, Zendesk triggers this callback after initialization. Please see `unreadMessages` field if you want to get the number by hook                         |     |         |
 | onResetWidget | () => void | Executes when the widget has been reset successfully completes                         |     |         |
+| onProactiveMessageDisplayed | (e: EventMessagingProactiveMessageDisplayed) => void | Executes a callback when a proactive message is displayed. Every call returns a function you can use to unsubscribe from the event. |     |         |
+| onProactiveMessageClicked | (e: EventMessagingProactiveMessageClicked) => void | Executes a callback when a proactive message is clicked. Every call returns a function you can use to unsubscribe from the event. |     |         |
 
 
 #### Example
 ```ts
 const App = () => {
-  const handleOpen = () => console.log('Chat become visible');
-  const handleClose = () => console.log('Chat become hidden');
+  const handleOpen = (e) => console.log('Chat become visible',e);
+  const handleClose = (e) => console.log('Chat become hidden',e);
   const handleUnreadMessages = (count: number) => console.log('You have',count,'messages to read');
+  const handleResetWidget = () => console.log('widget reset');
+  const handleProactiveMessageDisplayed = (e) => console.log('proactive message displayed',e.payload.campaignId);
+  const handleProactiveMessageClicked = (e) => console.log('proactive message clicked',e.payload.campaignId);
   
   return (
     <ZendeskProvider
@@ -82,6 +87,9 @@ const App = () => {
     onOpen={handleOpen}
     onClose={handleClose}
     onUnreadMessages={handleUnreadMessages}
+    onResetWidget={handleResetWidget}
+    onProactiveMessageDisplayed={handleProactiveMessageDisplayed}
+    onProactiveMessageClicked={handleProactiveMessageClicked}
     >
       <p>fake child example</p>
     </ZendeskProvider>
@@ -115,9 +123,10 @@ Library add some useful fields.
 | useSessionAuth | () => void | See details on [Zendesk docs](https://developer.zendesk.com/api-reference/widget-messaging/web/authentication/).
 | logoutUser            | () => void                                 | Your app may have a logout function that brings users back to a login screen. In this case, revert the messaging Web Widget to a pre-login state
 | resetWidget            | () => void                                 | This method clears all widget local state, including user data, conversations, and connections.
-| setCustomize | (theme: Partial<ZendeskCustomizationTheme>) => void | Dynamically updates the Web Widget Messenger’s color theme so it aligns with your brand or site theme.
+| setCustomize | (theme: Partial\<ZendeskCustomizationTheme\>) => void | Dynamically updates the Web Widget Messenger’s color theme so it aligns with your brand or site theme.
 | isOpen            | boolean                                 | this flag indicates if chat is visible or hidden. Derivated from from `onOpen` and `onCLose`
-| unreadMessages            | number / undefined                                 | this flag indicates number of unread messages . Derivated from from `onUnreadMessages`. Before internal callback this flag is `undefined`                       |                                                                                                                                           
+| unreadMessages            | number / undefined                                 | this flag indicates number of unread messages . Derivated from from `onUnreadMessages`. Before internal callback this flag is `undefined`                       |   
+| newConversation            | (conversationOptions?: Partial\<ZendeskConversationOptions\>) => void | Creates a new conversation with options to customize the display name, icon, and metadata. Once created, the conversation is immediately loaded into the message log. |                                                                                                                                           
 
 
 #### Example
@@ -136,7 +145,8 @@ const Home = () => {
     close,
     isOpen,
     unreadMessages,
-    setLocale
+    setLocale,
+    // all other methods
   } = useZendesk();
 
   const changeLocale = () => setLocale("es")

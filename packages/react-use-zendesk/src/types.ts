@@ -2,8 +2,23 @@ type AbstractMessagingEvent = {
   createdAt: number;
   id: string;
 };
+
 export type EventMessagingOpenedClosed = AbstractMessagingEvent & {
   type: "messagingOpened" | "messagingClosed";
+};
+export type EventMessagingProactiveMessageDisplayed = AbstractMessagingEvent & {
+  type: "proactiveMessageDisplayed";
+  payload: {
+    proactiveMessageId: number;
+    campaignId: string;
+  };
+};
+export type EventMessagingProactiveMessageClicked = AbstractMessagingEvent & {
+  type: "proactiveMessageClicked";
+  payload: {
+    proactiveMessageId: number;
+    campaignId: string;
+  };
 };
 
 export type ZendeskProviderProps = {
@@ -12,6 +27,12 @@ export type ZendeskProviderProps = {
   onClose?: (event: EventMessagingOpenedClosed) => void;
   onUnreadMessages?: (count: number) => void;
   onResetWidget?: () => void;
+  onProactiveMessageDisplayed?: (
+    event: EventMessagingProactiveMessageDisplayed,
+  ) => void;
+  onProactiveMessageClicked?: (
+    event: EventMessagingProactiveMessageClicked,
+  ) => void;
 };
 
 export type ZendeskConversationField = {
@@ -92,4 +113,6 @@ export type ZendeskMethod =
   | "resetWidget"
   | "customization"
   | "useSessionAuth"
-  | "newConversation";
+  | "newConversation"
+  | "proactiveMessageDisplayed"
+  | "proactiveMessageClicked";

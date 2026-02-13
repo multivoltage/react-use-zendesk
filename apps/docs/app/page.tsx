@@ -1,11 +1,16 @@
 "use client";
-import { EventMessagingOpenedClosed, ZendeskProvider } from "react-use-zendesk";
+import {
+  EventMessagingOpenedClosed,
+  EventMessagingProactiveMessageDisplayed,
+  ZendeskProvider,
+} from "react-use-zendesk";
 import { ExampleList } from "./components/ExampleList";
 import { useState } from "react";
 import { ValuesContainer } from "./components/ValuesContainer";
 import { CallbackContainer } from "./components/CallbackContainer";
 import { KeyForm } from "./components/KeyForm";
 import { toast } from "sonner";
+import { EventMessagingProactiveMessageClicked } from "react-use-zendesk";
 
 export default function Page(): JSX.Element {
   const [apiKey, setApiKey] = useState("");
@@ -60,6 +65,34 @@ export default function Page(): JSX.Element {
     ]);
   }
 
+  function handleProactiveMessageDisplayed(
+    event: EventMessagingProactiveMessageDisplayed,
+  ) {
+    toast(`onProactiveMessageDisplayed callback - ${JSON.stringify(event)}`);
+    setCallBacks((old) => [
+      {
+        params: arguments,
+        id: "onProactiveMessageDisplayed",
+        key: "onProactiveMessageDisplayed" + old.length,
+      },
+      ...old,
+    ]);
+  }
+
+  function handleProactiveMessageClicked(
+    event: EventMessagingProactiveMessageClicked,
+  ) {
+    toast(`onProactiveMessageClicked callback - ${JSON.stringify(event)}`);
+    setCallBacks((old) => [
+      {
+        params: arguments,
+        id: "onProactiveMessageClicked",
+        key: "onProactiveMessageClicked" + old.length,
+      },
+      ...old,
+    ]);
+  }
+
   function onChangeKey(key: string) {
     setApiKey(key);
   }
@@ -71,6 +104,8 @@ export default function Page(): JSX.Element {
       onClose={handleClose}
       onUnreadMessages={handleUnreadMessages}
       onResetWidget={handleResetWidget}
+      onProactiveMessageDisplayed={handleProactiveMessageDisplayed}
+      onProactiveMessageClicked={handleProactiveMessageClicked}
     >
       <main className="main">
         <div className="section-grid">

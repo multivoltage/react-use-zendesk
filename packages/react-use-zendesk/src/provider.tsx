@@ -3,6 +3,8 @@ import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { ZendeskContext } from "./context";
 import {
   EventMessagingOpenedClosed,
+  EventMessagingProactiveMessageClicked,
+  EventMessagingProactiveMessageDisplayed,
   LoginFailedError,
   ZendeskContextValues,
   ZendeskConversationField,
@@ -22,6 +24,8 @@ export const ZendeskProvider: React.FC<
   onClose,
   onUnreadMessages,
   onResetWidget,
+  onProactiveMessageDisplayed,
+  onProactiveMessageClicked,
   children,
 }) => {
   const isRegisteredCb = useRef(false);
@@ -35,12 +39,16 @@ export const ZendeskProvider: React.FC<
   const onCloseRef = useRef(onClose);
   const onUnreadMessagesRef = useRef(onUnreadMessages);
   const onResetWidgetRef = useRef(onResetWidget);
+  const onProactiveMessageDisplayedRef = useRef(onProactiveMessageDisplayed);
+  const onProactiveMessageClickedRef = useRef(onProactiveMessageClicked);
 
   useLayoutEffect(() => {
     onOpenRef.current = onOpen;
     onCloseRef.current = onClose;
     onUnreadMessagesRef.current = onUnreadMessages;
     onResetWidgetRef.current = onResetWidget;
+    onProactiveMessageDisplayedRef.current = onProactiveMessageDisplayed;
+    onProactiveMessageClickedRef.current = onProactiveMessageClicked;
   });
 
   function registerCallback() {
@@ -73,6 +81,24 @@ export const ZendeskProvider: React.FC<
         setUnreadMessages(unreadMessages);
         !!onUnreadMessagesRef.current &&
           onUnreadMessagesRef.current(unreadMessages);
+      },
+    );
+
+    ZendeskApi(
+      "messenger:on",
+      "proactiveMessageDisplayed",
+      function (event: EventMessagingProactiveMessageDisplayed) {
+        !!onProactiveMessageDisplayedRef.current &&
+          onProactiveMessageDisplayedRef.current(event);
+      },
+    );
+
+    ZendeskApi(
+      "messenger:on",
+      "proactiveMessageClicked",
+      function (event: EventMessagingProactiveMessageClicked) {
+        !!onProactiveMessageClickedRef.current &&
+          onProactiveMessageClickedRef.current(event);
       },
     );
 
