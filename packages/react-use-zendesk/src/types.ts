@@ -28,6 +28,14 @@ export type EventMessagingConversationStarted = AbstractMessagingEvent & {
     };
   };
 };
+export type EventMessagingConversationOpened = AbstractMessagingEvent & {
+  type: "conversationOpened";
+  payload: {
+    conversation: {
+      id: string | null;
+    };
+  };
+};
 
 export type ZendeskProviderProps = {
   apiKey: string;
@@ -42,6 +50,7 @@ export type ZendeskProviderProps = {
     event: EventMessagingProactiveMessageClicked,
   ) => void;
   onConversationStarted?: (event: EventMessagingConversationStarted) => void;
+  onConversationOpened?: (event: EventMessagingConversationOpened) => void;
 };
 
 export type ZendeskConversationField = {
@@ -125,4 +134,5 @@ export type ZendeskMethod =
   | "newConversation"
   | "proactiveMessageDisplayed"
   | "proactiveMessageClicked"
-  | "conversationStarted";
+  | "conversationStarted"
+  | "conversationOpened";

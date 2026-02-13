@@ -70,6 +70,7 @@ Place the `ZendeskProvider` as high as possible in your application. This will m
 | onProactiveMessageDisplayed | (e: EventMessagingProactiveMessageDisplayed) => void | Executes a callback when a proactive message is displayed. Every call returns a function you can use to unsubscribe from the event. |     |         |
 | onProactiveMessageClicked | (e: EventMessagingProactiveMessageClicked) => void | Executes a callback when a proactive message is clicked. Every call returns a function you can use to unsubscribe from the event. |     |         |
 | onConversationStarted | (e: EventMessagingConversationStarted) => void | Executes a callback when a conversation is started. Every call returns a function you can use to unsubscribe from the event. |     |         |
+| onConversationOpened | (e: EventMessagingConversationOpened) => void | Executes a callback when the conversation view is shown to the user. This event does not wait for messages to be rendered. |     |         |
 
 
 #### Example
@@ -81,7 +82,8 @@ const App = () => {
   const handleResetWidget = () => console.log('widget reset');
   const handleProactiveMessageDisplayed = (e) => console.log('proactive message displayed',e.payload.campaignId);
   const handleProactiveMessageClicked = (e) => console.log('proactive message clicked',e.payload.campaignId);
-  const handleConversationStarted = (e) => console.log('conversation started with id',e.payload.conversation.id); 
+  const handleConversationStarted = (e) => console.log('conversation started with id',e.payload.conversation.id);
+  const handleConversationOpened = (e) => console.log('conversation opened with id',e.payload.conversation); 
 
   return (
     <ZendeskProvider
@@ -93,6 +95,7 @@ const App = () => {
     onProactiveMessageDisplayed={handleProactiveMessageDisplayed}
     onProactiveMessageClicked={handleProactiveMessageClicked}
     onConversationStarted={handleConversationStarted}
+    onConversationOpened={handleConversationOpened}
     >
       <p>fake child example</p>
     </ZendeskProvider>

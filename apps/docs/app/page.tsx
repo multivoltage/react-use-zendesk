@@ -1,5 +1,6 @@
 "use client";
 import {
+  EventMessagingConversationOpened,
   EventMessagingConversationStarted,
   EventMessagingOpenedClosed,
   EventMessagingProactiveMessageDisplayed,
@@ -106,6 +107,18 @@ export default function Page(): JSX.Element {
     ]);
   }
 
+  function handleConversationOpened(event: EventMessagingConversationOpened) {
+    toast(`onConversationStarted callback - ${JSON.stringify(event)}`);
+    setCallBacks((old) => [
+      {
+        params: arguments,
+        id: "onConversationOpened",
+        key: "onConversationOpened" + old.length,
+      },
+      ...old,
+    ]);
+  }
+
   function onChangeKey(key: string) {
     setApiKey(key);
   }
@@ -120,6 +133,7 @@ export default function Page(): JSX.Element {
       onProactiveMessageDisplayed={handleProactiveMessageDisplayed}
       onProactiveMessageClicked={handleProactiveMessageClicked}
       onConversationStarted={handleConversationStarted}
+      onConversationOpened={handleConversationOpened}
     >
       <main className="main">
         <div className="section-grid">
