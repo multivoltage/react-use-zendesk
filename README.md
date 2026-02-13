@@ -68,7 +68,8 @@ Place the `ZendeskProvider` as high as possible in your application. This will m
 | onUnreadMessages | (count; number) => void | triggered when the current number of unread messages changes. If attached, Zendesk triggers this callback after initialization. Please see `unreadMessages` field if you want to get the number by hook                         |     |         |
 | onResetWidget | () => void | Executes when the widget has been reset successfully completes                         |     |         |
 | onProactiveMessageDisplayed | (e: EventMessagingProactiveMessageDisplayed) => void | Executes a callback when a proactive message is displayed. Every call returns a function you can use to unsubscribe from the event. |     |         |
-| onProactiveMessageClicked | (e: EventMessagingProactiveMessageClicked) => void | EventMessagingProactiveMessageClicked |     |         |
+| onProactiveMessageClicked | (e: EventMessagingProactiveMessageClicked) => void | Executes a callback when a proactive message is clicked. Every call returns a function you can use to unsubscribe from the event. |     |         |
+| onConversationStarted | (e: EventMessagingConversationStarted) => void | Executes a callback when a conversation is started. Every call returns a function you can use to unsubscribe from the event. |     |         |
 
 
 #### Example
@@ -80,7 +81,8 @@ const App = () => {
   const handleResetWidget = () => console.log('widget reset');
   const handleProactiveMessageDisplayed = (e) => console.log('proactive message displayed',e.payload.campaignId);
   const handleProactiveMessageClicked = (e) => console.log('proactive message clicked',e.payload.campaignId);
-  
+  const handleConversationStarted = (e) => console.log('conversation started with id',e.payload.conversation.id); 
+
   return (
     <ZendeskProvider
     apiKey={process.env.KEY || ""}
@@ -90,6 +92,7 @@ const App = () => {
     onResetWidget={handleResetWidget}
     onProactiveMessageDisplayed={handleProactiveMessageDisplayed}
     onProactiveMessageClicked={handleProactiveMessageClicked}
+    onConversationStarted={handleConversationStarted}
     >
       <p>fake child example</p>
     </ZendeskProvider>

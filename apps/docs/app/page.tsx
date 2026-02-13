@@ -1,5 +1,6 @@
 "use client";
 import {
+  EventMessagingConversationStarted,
   EventMessagingOpenedClosed,
   EventMessagingProactiveMessageDisplayed,
   ZendeskProvider,
@@ -93,6 +94,18 @@ export default function Page(): JSX.Element {
     ]);
   }
 
+  function handleConversationStarted(event: EventMessagingConversationStarted) {
+    toast(`onConversationStarted callback - ${JSON.stringify(event)}`);
+    setCallBacks((old) => [
+      {
+        params: arguments,
+        id: "onConversationStarted",
+        key: "onConversationStarted" + old.length,
+      },
+      ...old,
+    ]);
+  }
+
   function onChangeKey(key: string) {
     setApiKey(key);
   }
@@ -106,6 +119,7 @@ export default function Page(): JSX.Element {
       onResetWidget={handleResetWidget}
       onProactiveMessageDisplayed={handleProactiveMessageDisplayed}
       onProactiveMessageClicked={handleProactiveMessageClicked}
+      onConversationStarted={handleConversationStarted}
     >
       <main className="main">
         <div className="section-grid">

@@ -20,6 +20,14 @@ export type EventMessagingProactiveMessageClicked = AbstractMessagingEvent & {
     campaignId: string;
   };
 };
+export type EventMessagingConversationStarted = AbstractMessagingEvent & {
+  type: "conversationStarted";
+  payload: {
+    conversation: {
+      id: string;
+    };
+  };
+};
 
 export type ZendeskProviderProps = {
   apiKey: string;
@@ -33,6 +41,7 @@ export type ZendeskProviderProps = {
   onProactiveMessageClicked?: (
     event: EventMessagingProactiveMessageClicked,
   ) => void;
+  onConversationStarted?: (event: EventMessagingConversationStarted) => void;
 };
 
 export type ZendeskConversationField = {
@@ -115,4 +124,5 @@ export type ZendeskMethod =
   | "useSessionAuth"
   | "newConversation"
   | "proactiveMessageDisplayed"
-  | "proactiveMessageClicked";
+  | "proactiveMessageClicked"
+  | "conversationStarted";
