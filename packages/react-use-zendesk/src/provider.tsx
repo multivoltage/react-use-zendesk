@@ -2,6 +2,7 @@
 import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { ZendeskContext } from "./context";
 import {
+  EventMessagingOpenedClosed,
   LoginFailedError,
   ZendeskContextValues,
   ZendeskConversationField,
@@ -47,15 +48,23 @@ export const ZendeskProvider: React.FC<
       return;
     }
 
-    ZendeskApi("messenger:on", "open", function () {
-      setIsOpen(true);
-      !!onOpenRef.current && onOpenRef.current();
-    });
+    ZendeskApi(
+      "messenger:on",
+      "open",
+      function (event: EventMessagingOpenedClosed) {
+        setIsOpen(true);
+        !!onOpenRef.current && onOpenRef.current(event);
+      },
+    );
 
-    ZendeskApi("messenger:on", "close", function () {
-      setIsOpen(false);
-      !!onCloseRef.current && onCloseRef.current();
-    });
+    ZendeskApi(
+      "messenger:on",
+      "close",
+      function (event: EventMessagingOpenedClosed) {
+        setIsOpen(false);
+        !!onCloseRef.current && onCloseRef.current(event);
+      },
+    );
 
     ZendeskApi(
       "messenger:on",

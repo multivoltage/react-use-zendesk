@@ -1,7 +1,15 @@
+type AbstractMessagingEvent = {
+  createdAt: number;
+  id: string;
+};
+export type EventMessagingOpenedClosed = AbstractMessagingEvent & {
+  type: "messagingOpened" | "messagingClosed";
+};
+
 export type ZendeskProviderProps = {
   apiKey: string;
-  onOpen?: () => void;
-  onClose?: () => void;
+  onOpen?: (event: EventMessagingOpenedClosed) => void;
+  onClose?: (event: EventMessagingOpenedClosed) => void;
   onUnreadMessages?: (count: number) => void;
   onResetWidget?: () => void;
 };

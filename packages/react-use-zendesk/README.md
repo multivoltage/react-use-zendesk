@@ -63,8 +63,8 @@ Place the `ZendeskProvider` as high as possible in your application. This will m
 |---------------------|------------------|-----------------------------------------------------------------------------------------|----------|---------|
 | apiKey               | string           | api key of your Zendesk account                                                        | X     |         |
 | children            | React.ReactNode  | React children                                                                          | true     |         |
-| onOpen              | () => void       | triggered when the Widget opens (chat is visible). Please see `isOpen` field if you want to get chat state by hooks                                                   |     |         |
-| onClose              | () => void       | triggered when the Widget closes (chat is hidden). Please see `isOpen` field if you want to get chat state by hooks                                                      |     |         |
+| onOpen              | (e: EventMessagingOpenedClosed) => void       | triggered when the Widget opens (chat is visible). Please see `isOpen` field if you want to get chat state by hooks                                                   |     |         |
+| onClose              | (e: EventMessagingOpenedClosed) => void       | triggered when the Widget closes (chat is hidden). Please see `isOpen` field if you want to get chat state by hooks                                                      |     |         |
 | onUnreadMessages | (count; number) => void | triggered when the current number of unread messages changes. If attached, Zendesk triggers this callback after initialization. Please see `unreadMessages` field if you want to get the number by hook                         |     |         |
 | onResetWidget | () => void | Executes when the widget has been reset successfully completes                         |     |         |
 

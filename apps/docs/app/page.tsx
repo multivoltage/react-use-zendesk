@@ -1,5 +1,5 @@
 "use client";
-import { ZendeskProvider, useZendesk } from "react-use-zendesk";
+import { EventMessagingOpenedClosed, ZendeskProvider } from "react-use-zendesk";
 import { ExampleList } from "./components/ExampleList";
 import { useState } from "react";
 import { ValuesContainer } from "./components/ValuesContainer";
@@ -13,8 +13,8 @@ export default function Page(): JSX.Element {
     { params: any; id: string; key: string }[]
   >([]);
 
-  function handleOpen() {
-    toast("onOpen callback");
+  function handleOpen(event: EventMessagingOpenedClosed) {
+    toast(`"onOpen callback" - ${JSON.stringify(event)}`);
     setCallBacks((old) => [
       {
         params: arguments,
@@ -25,8 +25,8 @@ export default function Page(): JSX.Element {
     ]);
   }
 
-  function handleClose() {
-    toast("onClose callback");
+  function handleClose(event: EventMessagingOpenedClosed) {
+    toast(`"onClose callback" - ${JSON.stringify(event)}`);
     setCallBacks((old) => [
       {
         params: arguments,
