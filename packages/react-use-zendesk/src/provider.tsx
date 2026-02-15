@@ -215,8 +215,8 @@ export const ZendeskProvider: React.FC<
     ZendeskApi("messenger:set", "zIndex", newZIndex);
   }, []);
 
-  const setCookies = React.useCallback((isEnabled: boolean) => {
-    ZendeskApi("messenger:set", "cookies", isEnabled);
+  const setCookies = React.useCallback((range: string) => {
+    ZendeskApi("messenger:set", "cookies", range);
   }, []);
 
   const setConversationFields = React.useCallback(

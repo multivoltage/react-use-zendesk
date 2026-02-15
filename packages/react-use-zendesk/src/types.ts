@@ -135,7 +135,7 @@ export type ZendeskContextValues = {
   close: () => void;
   setLocale: (newLocale: string) => void;
   setZIndex: (newZIndex: number) => void;
-  setCookies: (isEnabled: boolean) => void;
+  setCookies: (range: "all" | "functional" | "none") => void;
   setConversationFields: (
     conversationFields: Array<ZendeskConversationField>,
   ) => void;
