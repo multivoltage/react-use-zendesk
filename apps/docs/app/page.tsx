@@ -2,6 +2,7 @@
 import {
   EventMessagingConversationOpened,
   EventMessagingConversationStarted,
+  EventMessagingNewConversationButtonClicked,
   EventMessagingOpenedClosed,
   EventMessagingProactiveMessageDisplayed,
   ZendeskProvider,
@@ -119,6 +120,18 @@ export default function Page(): JSX.Element {
     ]);
   }
 
+  function handleOnNewConversationButtonClicked(event: EventMessagingNewConversationButtonClicked){
+    toast(`onNewConversationButtonClicked callback - ${JSON.stringify(event)}`);
+    setCallBacks((old) => [
+      {
+        params: arguments,
+        id: "onNewConversationButtonClicked",
+        key: "onNewConversationButtonClicked" + old.length,
+      },
+      ...old,
+    ]);
+  }
+
   function onChangeKey(key: string) {
     setApiKey(key);
   }
@@ -134,6 +147,7 @@ export default function Page(): JSX.Element {
       onProactiveMessageClicked={handleProactiveMessageClicked}
       onConversationStarted={handleConversationStarted}
       onConversationOpened={handleConversationOpened}
+      onNewConversationButtonClicked={handleOnNewConversationButtonClicked}
     >
       <main className="main">
         <div className="section-grid">

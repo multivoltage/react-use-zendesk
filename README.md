@@ -71,6 +71,7 @@ Place the `ZendeskProvider` as high as possible in your application. This will m
 | onProactiveMessageClicked | (e: EventMessagingProactiveMessageClicked) => void | Executes a callback when a proactive message is clicked. Every call returns a function you can use to unsubscribe from the event. |     |         |
 | onConversationStarted | (e: EventMessagingConversationStarted) => void | Executes a callback when a conversation is started. Every call returns a function you can use to unsubscribe from the event. |     |         |
 | onConversationOpened | (e: EventMessagingConversationOpened) => void | Executes a callback when the conversation view is shown to the user. This event does not wait for messages to be rendered. |     |         |
+| onNewConversationButtonClicked | (e: EventMessagingNewConversationButtonClicked) => void | Executes a callback when the new conversation button is clicked. Every call returns a function you can use to unsubscribe from the event. |     |         |
 
 
 #### Example
@@ -84,6 +85,7 @@ const App = () => {
   const handleProactiveMessageClicked = (e) => console.log('proactive message clicked',e.payload.campaignId);
   const handleConversationStarted = (e) => console.log('conversation started with id',e.payload.conversation.id);
   const handleConversationOpened = (e) => console.log('conversation opened with id',e.payload.conversation); 
+  const handleOnNewConversationButtonClicked = (e) => console.log('clicked new conversation button'); 
 
   return (
     <ZendeskProvider
@@ -96,6 +98,7 @@ const App = () => {
     onProactiveMessageClicked={handleProactiveMessageClicked}
     onConversationStarted={handleConversationStarted}
     onConversationOpened={handleConversationOpened}
+    onNewConversationButtonClicked={handleOnNewConversationButtonClicked}
     >
       <p>fake child example</p>
     </ZendeskProvider>
