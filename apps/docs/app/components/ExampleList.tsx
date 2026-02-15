@@ -3,7 +3,6 @@ import { Example, ExampleProps } from "./Example";
 import { toast } from "sonner";
 
 export const ExampleList: React.FC = () => {
-  const [cookieActive, setCookieActive] = useState(true);
   const [jwt, setJwt] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -124,10 +123,9 @@ export const ExampleList: React.FC = () => {
           and session storage in order to function.
         </div>
       ),
-      buttonText: `set (${!cookieActive}) cookies`,
+      buttonText: `set "none" cookies`,
       onClick: ({ setCookies }) => {
-        setCookies(!cookieActive);
-        setCookieActive(!cookieActive);
+        setCookies("none");
       },
     },
     {
