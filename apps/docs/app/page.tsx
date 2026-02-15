@@ -1,5 +1,6 @@
 "use client";
 import {
+  EventMessagingConversationAgentAssigned,
   EventMessagingConversationOpened,
   EventMessagingConversationStarted,
   EventMessagingConversationWithAgentRequested,
@@ -145,6 +146,18 @@ export default function Page(): JSX.Element {
     ]);
   }
 
+  function handleEventMessagingConversationAgentAssigned(event: EventMessagingConversationAgentAssigned){
+    toast(`onConversationAgentAssigned callback - ${JSON.stringify(event)}`);
+    setCallBacks((old) => [
+      {
+        params: arguments,
+        id: "onConversationAgentAssigned",
+        key: "onConversationAgentAssigned" + old.length,
+      },
+      ...old,
+    ]);
+  }
+
   function onChangeKey(key: string) {
     setApiKey(key);
   }
@@ -162,6 +175,7 @@ export default function Page(): JSX.Element {
       onConversationOpened={handleConversationOpened}
       onNewConversationButtonClicked={handleOnNewConversationButtonClicked}
       onConversationWithAgentRequested={handleConversationWithAgentRequested}
+      onConversationAgentAssigned={handleEventMessagingConversationAgentAssigned}
     >
       <main className="main">
         <div className="section-grid">

@@ -73,6 +73,7 @@ Place the `ZendeskProvider` as high as possible in your application. This will m
 | onConversationOpened | (e: EventMessagingConversationOpened) => void | Executes a callback when the conversation view is shown to the user. This event does not wait for messages to be rendered. |     |         |
 | onNewConversationButtonClicked | (e: EventMessagingNewConversationButtonClicked) => void | Executes a callback when the new conversation button is clicked. Every call returns a function you can use to unsubscribe from the event. |     |         |
 | onConversationWithAgentRequested | (e: EventMessagingConversationWithAgentRequested) => void | Executes a callback when a conversation with an agent is requested. Every call returns a function you can use to unsubscribe from the event. |     |         |
+| onConversationAgentAssigned | (e: EventMessagingConversationAgentAssigned) => void | Executes a callback when an agent is assigned to a conversation. Every call returns a function you can use to unsubscribe from the event. |     |         |
 
 #### Example
 ```ts

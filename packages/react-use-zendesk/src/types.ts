@@ -50,6 +50,15 @@ export type EventMessagingConversationWithAgentRequested = AbstractMessagingEven
     }
   }
 }
+export type EventMessagingConversationAgentAssigned = AbstractMessagingEvent & {
+  type: "conversationAgentAssigned",
+  payload: {
+    conversation: {
+      id: string
+    }
+  }
+}
+
 
 export type ZendeskProviderProps = {
   apiKey: string;
@@ -67,6 +76,7 @@ export type ZendeskProviderProps = {
   onConversationOpened?: (event: EventMessagingConversationOpened) => void;
   onNewConversationButtonClicked?: (event: EventMessagingNewConversationButtonClicked) => void
   onConversationWithAgentRequested?: (event: EventMessagingConversationWithAgentRequested) => void
+  onConversationAgentAssigned?: (event: EventMessagingConversationAgentAssigned) => void
 };
 
 export type ZendeskConversationField = {
@@ -154,3 +164,4 @@ export type ZendeskMethod =
   | "conversationOpened"
   | "newConversationButtonClicked"
   | "conversationWithAgentRequested"
+  | "conversationAgentAssigned"

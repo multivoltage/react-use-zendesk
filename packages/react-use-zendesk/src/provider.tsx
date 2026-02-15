@@ -2,6 +2,7 @@
 import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { ZendeskContext } from "./context";
 import {
+  EventMessagingConversationAgentAssigned,
   EventMessagingConversationOpened,
   EventMessagingConversationStarted,
   EventMessagingConversationWithAgentRequested,
@@ -34,6 +35,7 @@ export const ZendeskProvider: React.FC<
   onConversationOpened,
   onNewConversationButtonClicked,
   onConversationWithAgentRequested,
+  onConversationAgentAssigned,
   children,
 }) => {
   const isRegisteredCb = useRef(false);
@@ -53,6 +55,7 @@ export const ZendeskProvider: React.FC<
   const onConversationOpenedRef = useRef(onConversationOpened);
   const onNewConversationButtonClickedRef = useRef(onNewConversationButtonClicked)
   const onConversationWithAgentRequestedRef = useRef(onConversationWithAgentRequested)
+  const onConversationAgentAssignedRef = useRef(onConversationAgentAssigned)
 
   useLayoutEffect(() => {
     onOpenRef.current = onOpen;
@@ -65,6 +68,7 @@ export const ZendeskProvider: React.FC<
     onConversationOpenedRef.current = onConversationOpened;
     onNewConversationButtonClickedRef.current = onNewConversationButtonClicked
     onConversationWithAgentRequestedRef.current = onConversationWithAgentRequested
+    onConversationAgentAssignedRef.current = onConversationAgentAssigned
   });
 
   function registerCallback() {
@@ -151,6 +155,15 @@ export const ZendeskProvider: React.FC<
       function (event: EventMessagingConversationWithAgentRequested) {
         !!onConversationWithAgentRequestedRef.current &&
           onConversationWithAgentRequestedRef.current(event);
+      },
+    );
+
+    ZendeskApi(
+      "messenger:on",
+      "conversationAgentAssigned",
+      function (event: EventMessagingConversationAgentAssigned) {
+        !!onConversationAgentAssignedRef.current &&
+          onConversationAgentAssignedRef.current(event);
       },
     );
 
