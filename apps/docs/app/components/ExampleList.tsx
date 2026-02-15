@@ -278,8 +278,13 @@ export const ExampleList: React.FC = () => {
       buttonText: "customize",
       onClick({ setCustomize }) {
         setCustomize({
-          primary: "#DB5F46",
-          background: "#518e37ff",
+          theme: {
+            primary: "#DB5F46",
+            background: "#518e37ff",
+          },
+          common: {
+            contentScale: 150,
+          },
         });
       },
     },

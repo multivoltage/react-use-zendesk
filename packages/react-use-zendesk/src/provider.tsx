@@ -2,6 +2,15 @@
 import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { ZendeskContext } from "./context";
 import {
+  EventMessagingConversationAgentAssigned,
+  EventMessagingConversationOpened,
+  EventMessagingConversationStarted,
+  EventMessagingConversationWithAgentRequested,
+  EventMessagingMessagesShown,
+  EventMessagingNewConversationButtonClicked,
+  EventMessagingOpenedClosed,
+  EventMessagingProactiveMessageClicked,
+  EventMessagingProactiveMessageDisplayed,
   LoginFailedError,
   ZendeskContextValues,
   ZendeskConversationField,
@@ -21,6 +30,14 @@ export const ZendeskProvider: React.FC<
   onClose,
   onUnreadMessages,
   onResetWidget,
+  onProactiveMessageDisplayed,
+  onProactiveMessageClicked,
+  onConversationStarted,
+  onConversationOpened,
+  onNewConversationButtonClicked,
+  onConversationWithAgentRequested,
+  onConversationAgentAssigned,
+  onMessagesShown,
   children,
 }) => {
   const isRegisteredCb = useRef(false);
@@ -34,12 +51,33 @@ export const ZendeskProvider: React.FC<
   const onCloseRef = useRef(onClose);
   const onUnreadMessagesRef = useRef(onUnreadMessages);
   const onResetWidgetRef = useRef(onResetWidget);
+  const onProactiveMessageDisplayedRef = useRef(onProactiveMessageDisplayed);
+  const onProactiveMessageClickedRef = useRef(onProactiveMessageClicked);
+  const onConversationStartedRef = useRef(onConversationStarted);
+  const onConversationOpenedRef = useRef(onConversationOpened);
+  const onNewConversationButtonClickedRef = useRef(
+    onNewConversationButtonClicked,
+  );
+  const onConversationWithAgentRequestedRef = useRef(
+    onConversationWithAgentRequested,
+  );
+  const onConversationAgentAssignedRef = useRef(onConversationAgentAssigned);
+  const onMessagesShownRef = useRef(onMessagesShown);
 
   useLayoutEffect(() => {
     onOpenRef.current = onOpen;
     onCloseRef.current = onClose;
     onUnreadMessagesRef.current = onUnreadMessages;
     onResetWidgetRef.current = onResetWidget;
+    onProactiveMessageDisplayedRef.current = onProactiveMessageDisplayed;
+    onProactiveMessageClickedRef.current = onProactiveMessageClicked;
+    onConversationStartedRef.current = onConversationStarted;
+    onConversationOpenedRef.current = onConversationOpened;
+    onNewConversationButtonClickedRef.current = onNewConversationButtonClicked;
+    onConversationWithAgentRequestedRef.current =
+      onConversationWithAgentRequested;
+    onConversationAgentAssignedRef.current = onConversationAgentAssigned;
+    onMessagesShownRef.current = onMessagesShown;
   });
 
   function registerCallback() {
@@ -47,15 +85,23 @@ export const ZendeskProvider: React.FC<
       return;
     }
 
-    ZendeskApi("messenger:on", "open", function () {
-      setIsOpen(true);
-      !!onOpenRef.current && onOpenRef.current();
-    });
+    ZendeskApi(
+      "messenger:on",
+      "open",
+      function (event: EventMessagingOpenedClosed) {
+        setIsOpen(true);
+        !!onOpenRef.current && onOpenRef.current(event);
+      },
+    );
 
-    ZendeskApi("messenger:on", "close", function () {
-      setIsOpen(false);
-      !!onCloseRef.current && onCloseRef.current();
-    });
+    ZendeskApi(
+      "messenger:on",
+      "close",
+      function (event: EventMessagingOpenedClosed) {
+        setIsOpen(false);
+        !!onCloseRef.current && onCloseRef.current(event);
+      },
+    );
 
     ZendeskApi(
       "messenger:on",
@@ -64,6 +110,77 @@ export const ZendeskProvider: React.FC<
         setUnreadMessages(unreadMessages);
         !!onUnreadMessagesRef.current &&
           onUnreadMessagesRef.current(unreadMessages);
+      },
+    );
+
+    ZendeskApi(
+      "messenger:on",
+      "proactiveMessageDisplayed",
+      function (event: EventMessagingProactiveMessageDisplayed) {
+        !!onProactiveMessageDisplayedRef.current &&
+          onProactiveMessageDisplayedRef.current(event);
+      },
+    );
+
+    ZendeskApi(
+      "messenger:on",
+      "proactiveMessageClicked",
+      function (event: EventMessagingProactiveMessageClicked) {
+        !!onProactiveMessageClickedRef.current &&
+          onProactiveMessageClickedRef.current(event);
+      },
+    );
+
+    ZendeskApi(
+      "messenger:on",
+      "conversationStarted",
+      function (event: EventMessagingConversationStarted) {
+        !!onConversationStartedRef.current &&
+          onConversationStartedRef.current(event);
+      },
+    );
+
+    ZendeskApi(
+      "messenger:on",
+      "conversationOpened",
+      function (event: EventMessagingConversationOpened) {
+        !!onConversationOpenedRef.current &&
+          onConversationOpenedRef.current(event);
+      },
+    );
+
+    ZendeskApi(
+      "messenger:on",
+      "newConversationButtonClicked",
+      function (event: EventMessagingNewConversationButtonClicked) {
+        !!onNewConversationButtonClickedRef.current &&
+          onNewConversationButtonClickedRef.current(event);
+      },
+    );
+
+    ZendeskApi(
+      "messenger:on",
+      "conversationWithAgentRequested",
+      function (event: EventMessagingConversationWithAgentRequested) {
+        !!onConversationWithAgentRequestedRef.current &&
+          onConversationWithAgentRequestedRef.current(event);
+      },
+    );
+
+    ZendeskApi(
+      "messenger:on",
+      "conversationAgentAssigned",
+      function (event: EventMessagingConversationAgentAssigned) {
+        !!onConversationAgentAssignedRef.current &&
+          onConversationAgentAssignedRef.current(event);
+      },
+    );
+
+    ZendeskApi(
+      "messenger:on",
+      "messagesShown",
+      function (event: EventMessagingMessagesShown) {
+        !!onMessagesShownRef.current && onMessagesShownRef.current(event);
       },
     );
 
@@ -102,8 +219,8 @@ export const ZendeskProvider: React.FC<
     ZendeskApi("messenger:set", "zIndex", newZIndex);
   }, []);
 
-  const setCookies = React.useCallback((isEnabled: boolean) => {
-    ZendeskApi("messenger:set", "cookies", isEnabled);
+  const setCookies = React.useCallback((range: string) => {
+    ZendeskApi("messenger:set", "cookies", range);
   }, []);
 
   const setConversationFields = React.useCallback(
@@ -155,10 +272,8 @@ export const ZendeskProvider: React.FC<
   }, []);
 
   const setCustomize = React.useCallback(
-    (theme: Partial<ZendeskCustomizationTheme>) => {
-      ZendeskApi("messenger:set", "customization", {
-        theme,
-      });
+    (customization: Partial<ZendeskCustomizationTheme>) => {
+      ZendeskApi("messenger:set", "customization", customization);
     },
     [],
   );

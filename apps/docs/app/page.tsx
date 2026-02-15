@@ -1,11 +1,22 @@
 "use client";
-import { ZendeskProvider, useZendesk } from "react-use-zendesk";
+import {
+  EventMessagingConversationAgentAssigned,
+  EventMessagingConversationOpened,
+  EventMessagingConversationStarted,
+  EventMessagingConversationWithAgentRequested,
+  EventMessagingMessagesShown,
+  EventMessagingNewConversationButtonClicked,
+  EventMessagingOpenedClosed,
+  EventMessagingProactiveMessageDisplayed,
+  ZendeskProvider,
+} from "react-use-zendesk";
 import { ExampleList } from "./components/ExampleList";
 import { useState } from "react";
 import { ValuesContainer } from "./components/ValuesContainer";
 import { CallbackContainer } from "./components/CallbackContainer";
 import { KeyForm } from "./components/KeyForm";
 import { toast } from "sonner";
+import { EventMessagingProactiveMessageClicked } from "react-use-zendesk";
 
 export default function Page(): JSX.Element {
   const [apiKey, setApiKey] = useState("");
@@ -13,8 +24,8 @@ export default function Page(): JSX.Element {
     { params: any; id: string; key: string }[]
   >([]);
 
-  function handleOpen() {
-    toast("onOpen callback");
+  function handleOpen(event: EventMessagingOpenedClosed) {
+    toast(`"onOpen callback" - ${JSON.stringify(event)}`);
     setCallBacks((old) => [
       {
         params: arguments,
@@ -25,8 +36,8 @@ export default function Page(): JSX.Element {
     ]);
   }
 
-  function handleClose() {
-    toast("onClose callback");
+  function handleClose(event: EventMessagingOpenedClosed) {
+    toast(`"onClose callback" - ${JSON.stringify(event)}`);
     setCallBacks((old) => [
       {
         params: arguments,
@@ -60,6 +71,114 @@ export default function Page(): JSX.Element {
     ]);
   }
 
+  function handleProactiveMessageDisplayed(
+    event: EventMessagingProactiveMessageDisplayed,
+  ) {
+    toast(`onProactiveMessageDisplayed callback - ${JSON.stringify(event)}`);
+    setCallBacks((old) => [
+      {
+        params: arguments,
+        id: "onProactiveMessageDisplayed",
+        key: "onProactiveMessageDisplayed" + old.length,
+      },
+      ...old,
+    ]);
+  }
+
+  function handleProactiveMessageClicked(
+    event: EventMessagingProactiveMessageClicked,
+  ) {
+    toast(`onProactiveMessageClicked callback - ${JSON.stringify(event)}`);
+    setCallBacks((old) => [
+      {
+        params: arguments,
+        id: "onProactiveMessageClicked",
+        key: "onProactiveMessageClicked" + old.length,
+      },
+      ...old,
+    ]);
+  }
+
+  function handleConversationStarted(event: EventMessagingConversationStarted) {
+    toast(`onConversationStarted callback - ${JSON.stringify(event)}`);
+    setCallBacks((old) => [
+      {
+        params: arguments,
+        id: "onConversationStarted",
+        key: "onConversationStarted" + old.length,
+      },
+      ...old,
+    ]);
+  }
+
+  function handleConversationOpened(event: EventMessagingConversationOpened) {
+    toast(`onConversationStarted callback - ${JSON.stringify(event)}`);
+    setCallBacks((old) => [
+      {
+        params: arguments,
+        id: "onConversationOpened",
+        key: "onConversationOpened" + old.length,
+      },
+      ...old,
+    ]);
+  }
+
+  function handleOnNewConversationButtonClicked(
+    event: EventMessagingNewConversationButtonClicked,
+  ) {
+    toast(`onNewConversationButtonClicked callback - ${JSON.stringify(event)}`);
+    setCallBacks((old) => [
+      {
+        params: arguments,
+        id: "onNewConversationButtonClicked",
+        key: "onNewConversationButtonClicked" + old.length,
+      },
+      ...old,
+    ]);
+  }
+
+  function handleConversationWithAgentRequested(
+    event: EventMessagingConversationWithAgentRequested,
+  ) {
+    toast(
+      `onConversationWithAgentRequested callback - ${JSON.stringify(event)}`,
+    );
+    setCallBacks((old) => [
+      {
+        params: arguments,
+        id: "onConversationWithAgentRequested",
+        key: "onConversationWithAgentRequested" + old.length,
+      },
+      ...old,
+    ]);
+  }
+
+  function handleEventMessagingConversationAgentAssigned(
+    event: EventMessagingConversationAgentAssigned,
+  ) {
+    toast(`onConversationAgentAssigned callback - ${JSON.stringify(event)}`);
+    setCallBacks((old) => [
+      {
+        params: arguments,
+        id: "onConversationAgentAssigned",
+        key: "onConversationAgentAssigned" + old.length,
+      },
+      ...old,
+    ]);
+  }
+
+  function handleMessagesShown(event: EventMessagingMessagesShown) {
+    toast(`onMessagesShown callback - ${JSON.stringify(event)}`);
+    setCallBacks((old) => [
+      {
+        params: arguments,
+        id: "onMessagesShown",
+        key: "onMessagesShown" + old.length,
+      },
+      ...old,
+    ]);
+  }
+
   function onChangeKey(key: string) {
     setApiKey(key);
   }
@@ -71,6 +190,16 @@ export default function Page(): JSX.Element {
       onClose={handleClose}
       onUnreadMessages={handleUnreadMessages}
       onResetWidget={handleResetWidget}
+      onProactiveMessageDisplayed={handleProactiveMessageDisplayed}
+      onProactiveMessageClicked={handleProactiveMessageClicked}
+      onConversationStarted={handleConversationStarted}
+      onConversationOpened={handleConversationOpened}
+      onNewConversationButtonClicked={handleOnNewConversationButtonClicked}
+      onConversationWithAgentRequested={handleConversationWithAgentRequested}
+      onConversationAgentAssigned={
+        handleEventMessagingConversationAgentAssigned
+      }
+      onMessagesShown={handleMessagesShown}
     >
       <main className="main">
         <div className="section-grid">

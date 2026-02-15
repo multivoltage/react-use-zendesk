@@ -63,25 +63,48 @@ Place the `ZendeskProvider` as high as possible in your application. This will m
 |---------------------|------------------|-----------------------------------------------------------------------------------------|----------|---------|
 | apiKey               | string           | api key of your Zendesk account                                                        | X     |         |
 | children            | React.ReactNode  | React children                                                                          | true     |         |
-| onOpen              | () => void       | triggered when the Widget opens (chat is visible). Please see `isOpen` field if you want to get chat state by hooks                                                   |     |         |
-| onClose              | () => void       | triggered when the Widget closes (chat is hidden). Please see `isOpen` field if you want to get chat state by hooks                                                      |     |         |
+| onOpen              | (e: EventMessagingOpenedClosed) => void       | triggered when the Widget opens (chat is visible). Please see `isOpen` field if you want to get chat state by hooks                                                   |     |         |
+| onClose              | (e: EventMessagingOpenedClosed) => void       | triggered when the Widget closes (chat is hidden). Please see `isOpen` field if you want to get chat state by hooks                                                      |     |         |
 | onUnreadMessages | (count; number) => void | triggered when the current number of unread messages changes. If attached, Zendesk triggers this callback after initialization. Please see `unreadMessages` field if you want to get the number by hook                         |     |         |
 | onResetWidget | () => void | Executes when the widget has been reset successfully completes                         |     |         |
-
+| onProactiveMessageDisplayed | (e: EventMessagingProactiveMessageDisplayed) => void | Executes a callback when a proactive message is displayed. Every call returns a function you can use to unsubscribe from the event. |     |         |
+| onProactiveMessageClicked | (e: EventMessagingProactiveMessageClicked) => void | Executes a callback when a proactive message is clicked. Every call returns a function you can use to unsubscribe from the event. |     |         |
+| onConversationStarted | (e: EventMessagingConversationStarted) => void | Executes a callback when a conversation is started. Every call returns a function you can use to unsubscribe from the event. |     |         |
+| onConversationOpened | (e: EventMessagingConversationOpened) => void | Executes a callback when the conversation view is shown to the user. This event does not wait for messages to be rendered. |     |         |
+| onNewConversationButtonClicked | (e: EventMessagingNewConversationButtonClicked) => void | Executes a callback when the new conversation button is clicked. Every call returns a function you can use to unsubscribe from the event. |     |         |
+| onConversationWithAgentRequested | (e: EventMessagingConversationWithAgentRequested) => void | Executes a callback when a conversation with an agent is requested. Every call returns a function you can use to unsubscribe from the event. |     |         |
+| onConversationAgentAssigned | (e: EventMessagingConversationAgentAssigned) => void | Executes a callback when an agent is assigned to a conversation. Every call returns a function you can use to unsubscribe from the event. |     |         |
+| onMessagesShown | (e: EventMessagingMessagesShown) => void | Executes a callback when messages are being rendered in the conversation screen. This event is called every time messages (not typing indicators or timestamps) are being added to the view. |     |         |
 
 #### Example
 ```ts
 const App = () => {
-  const handleOpen = () => console.log('Chat become visible');
-  const handleClose = () => console.log('Chat become hidden');
+  const handleOpen = (e) => console.log('Chat become visible',e);
+  const handleClose = (e) => console.log('Chat become hidden',e);
   const handleUnreadMessages = (count: number) => console.log('You have',count,'messages to read');
-  
+  const handleResetWidget = () => console.log('widget reset');
+  const handleProactiveMessageDisplayed = (e) => console.log('proactive message displayed',e.payload.campaignId);
+  const handleProactiveMessageClicked = (e) => console.log('proactive message clicked',e.payload.campaignId);
+  const handleConversationStarted = (e) => console.log('conversation started with id',e.payload.conversation.id);
+  const handleConversationOpened = (e) => console.log('conversation opened with id',e.payload.conversation); 
+  const handleOnNewConversationButtonClicked = (e) => console.log('clicked new conversation button'); 
+  const handleConversationWithAgentRequested = (e) => console.log('converstation with agent started');
+  const handleMessagesShown = (e) => console.log('messages shown');
+
   return (
     <ZendeskProvider
     apiKey={process.env.KEY || ""}
     onOpen={handleOpen}
     onClose={handleClose}
     onUnreadMessages={handleUnreadMessages}
+    onResetWidget={handleResetWidget}
+    onProactiveMessageDisplayed={handleProactiveMessageDisplayed}
+    onProactiveMessageClicked={handleProactiveMessageClicked}
+    onConversationStarted={handleConversationStarted}
+    onConversationOpened={handleConversationOpened}
+    onNewConversationButtonClicked={handleOnNewConversationButtonClicked}
+    onConversationWithAgentRequested={handleConversationWithAgentRequested}
+    onMessagesShown={handleMessagesShown}
     >
       <p>fake child example</p>
     </ZendeskProvider>
@@ -108,16 +131,15 @@ Library add some useful fields.
 | close            | () => void                                 | Closes the messaging Web Widget
 | setLocale            | (newLocale: string) => void                                 | Sets the locale of the messaging Web Widget.
 | setZIndex            | (newZIndex: number) => void                                 | Sets the CSS property z-index on all the iframes for the messaging WebWidget.
-| setCookies            | (isEnabled: boolean) => void                                 | The messaging Web Widget uses a mixture of cookies as well as local and session storage in order to function.
+| setCookies            | (range: string) => void                                 | The messaging Web Widget uses a mixture of cookies as well as local and session storage in order to function. See details on [Zendesk docs](https://developer.zendesk.com/api-reference/widget-messaging/web/core/#set-cookies)
 | setConversationFields            | (conversationFields: ZendeskConversationField[]) => void                                 | Allows values for conversation fields to be set in the client to add contextual data about the conversation.
 | setConversationTags            | (conversationTags: string[]) => void                                 | Allows custom conversation tags to be set in the client to add contextual data about the conversation
 | loginUser            | (jwtToken: string, loginCallback?: (error: null/LoginFailedError) => void) => void                                 | If your application has a login flow, or if a user needs to access the same conversation from multiple devices. See details on [Zendesk docs](https://developer.zendesk.com/api-reference/widget-messaging/web/authentication/). Error is mapped with the same error of official documentation.
 | useSessionAuth | () => void | See details on [Zendesk docs](https://developer.zendesk.com/api-reference/widget-messaging/web/authentication/).
 | logoutUser            | () => void                                 | Your app may have a logout function that brings users back to a login screen. In this case, revert the messaging Web Widget to a pre-login state
 | resetWidget            | () => void                                 | This method clears all widget local state, including user data, conversations, and connections.
-| setCustomize | (theme: Partial\<ZendeskCustomizationTheme\>) => void | Dynamically updates the Web Widget Messenger’s color theme so it aligns with your brand or site theme.
+| setCustomize | (customization: Partial\<ZendeskCustomizationTheme\>) => void | Dynamically updates the Web Widget Messenger's appearance and behavior. The Customization API lets you adjust the widget using configuration objects for theme colors, common settings, conversation list, and message log.
 | isOpen            | boolean                                 | this flag indicates if chat is visible or hidden. Derivated from from `onOpen` and `onCLose`
-| unreadMessages            | number / undefined                                 | this flag indicates number of unread messages . Derivated from from `onUnreadMessages`. Before internal callback this flag is `undefined`                       |   
 | unreadMessages            | number / undefined                                 | this flag indicates number of unread messages . Derivated from from `onUnreadMessages`. Before internal callback this flag is `undefined`                       |   
 | newConversation            | (conversationOptions?: Partial\<ZendeskConversationOptions\>) => void | Creates a new conversation with options to customize the display name, icon, and metadata. Once created, the conversation is immediately loaded into the message log. |                                                                                                                                           
 
