@@ -268,10 +268,8 @@ export const ZendeskProvider: React.FC<
   }, []);
 
   const setCustomize = React.useCallback(
-    (theme: Partial<ZendeskCustomizationTheme>) => {
-      ZendeskApi("messenger:set", "customization", {
-        theme,
-      });
+    (customization: Partial<ZendeskCustomizationTheme>) => {
+      ZendeskApi("messenger:set", "customization", customization);
     },
     [],
   );

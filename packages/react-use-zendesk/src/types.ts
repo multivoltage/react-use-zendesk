@@ -105,21 +105,34 @@ export type LoginFailedError = {
 };
 
 export type ZendeskCustomizationTheme = {
-  primary: string;
-  onPrimary: string;
-  message: string;
-  onMessage: string;
-  action: string;
-  onAction: string;
-  businessMessage: string;
-  onBusinessMessage: string;
-  background: string;
-  onBackground: string;
-  error: string;
-  onError: string;
-  notify: string;
-  onNotify: string;
-  onSecondaryAction: string;
+  theme?: {
+    primary?: string;
+    onPrimary?: string;
+    message?: string;
+    onMessage?: string;
+    action?: string;
+    onAction?: string;
+    businessMessage?: string;
+    onBusinessMessage?: string;
+    background?: string;
+    onBackground?: string;
+    error?: string;
+    onError?: string;
+    notify?: string;
+    onNotify?: string;
+    onSecondaryAction?: string;
+  }
+  common?: {
+    hideHeader?: boolean;
+    contentScale?: number
+  }
+  conversationList?: {
+    hideNewConversationButton?: boolean;
+    hideHeader?: boolean;
+  }
+  messageLog?: {
+    hideHeader?: boolean
+  }
 };
 
 export type ZendeskConversationOptions = {
@@ -146,7 +159,7 @@ export type ZendeskContextValues = {
   ) => void;
   logoutUser: () => void;
   resetWidget: () => void;
-  setCustomize: (theme: Partial<ZendeskCustomizationTheme>) => void;
+  setCustomize: (customization: Partial<ZendeskCustomizationTheme>) => void;
   newConversation: (
     conversationOptions?: Partial<ZendeskConversationOptions>,
   ) => void;
