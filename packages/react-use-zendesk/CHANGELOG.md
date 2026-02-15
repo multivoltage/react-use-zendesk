@@ -1,5 +1,45 @@
 # react-use-zendesk
 
+## 2.0.0
+
+### Major Changes
+
+- 3733cf4: allow to change all options for customization (read docs).
+  Method signature changed since user now can pass also other customization properties.
+  ```js
+  setCustomization({
+    primary: "#DB5F46",
+    background: "#518e37ff",
+  });
+  ```
+  Now accept different object
+  ```js
+  setCustomization({
+    theme: {
+      primary: "#DB5F46",
+      background: "#518e37ff",
+    },
+    common: {
+      contentScale: 150,
+    },
+  });
+  ```
+
+### Minor Changes
+
+- 50ba45e: add onMessagesShown callback
+- 078b744: add onConversationAgentAssigned callback
+- dd895d0: add onConversationStarted callback
+- cc9c937: add newConversationButtonClicked callback
+- a4a1bba: add onConversationWithAgentRequested callback
+- 36d6a1a: add onConversationOpened callback
+- 81bcbc0: add onProactiveMessageDisplayed/onProactiveMessageClicked callbacks
+
+### Patch Changes
+
+- e8698ed: change setCookie parameter types
+- 276dae5: add onOpen onClose event object
+
 ## 1.5.0
 
 ### Minor Changes
