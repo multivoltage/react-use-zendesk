@@ -74,6 +74,7 @@ Place the `ZendeskProvider` as high as possible in your application. This will m
 | onNewConversationButtonClicked | (e: EventMessagingNewConversationButtonClicked) => void | Executes a callback when the new conversation button is clicked. Every call returns a function you can use to unsubscribe from the event. |     |         |
 | onConversationWithAgentRequested | (e: EventMessagingConversationWithAgentRequested) => void | Executes a callback when a conversation with an agent is requested. Every call returns a function you can use to unsubscribe from the event. |     |         |
 | onConversationAgentAssigned | (e: EventMessagingConversationAgentAssigned) => void | Executes a callback when an agent is assigned to a conversation. Every call returns a function you can use to unsubscribe from the event. |     |         |
+| onMessagesShown | (e: EventMessagingMessagesShown) => void | Executes a callback when messages are being rendered in the conversation screen. This event is called every time messages (not typing indicators or timestamps) are being added to the view. |     |         |
 
 #### Example
 ```ts
@@ -88,6 +89,7 @@ const App = () => {
   const handleConversationOpened = (e) => console.log('conversation opened with id',e.payload.conversation); 
   const handleOnNewConversationButtonClicked = (e) => console.log('clicked new conversation button'); 
   const handleConversationWithAgentRequested = (e) => console.log('converstation with agent started');
+  const handleMessagesShown = (e) => console.log('messages shown');
 
   return (
     <ZendeskProvider
@@ -102,6 +104,7 @@ const App = () => {
     onConversationOpened={handleConversationOpened}
     onNewConversationButtonClicked={handleOnNewConversationButtonClicked}
     onConversationWithAgentRequested={handleConversationWithAgentRequested}
+    onMessagesShown={handleMessagesShown}
     >
       <p>fake child example</p>
     </ZendeskProvider>

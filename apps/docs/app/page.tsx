@@ -4,6 +4,7 @@ import {
   EventMessagingConversationOpened,
   EventMessagingConversationStarted,
   EventMessagingConversationWithAgentRequested,
+  EventMessagingMessagesShown,
   EventMessagingNewConversationButtonClicked,
   EventMessagingOpenedClosed,
   EventMessagingProactiveMessageDisplayed,
@@ -158,6 +159,19 @@ export default function Page(): JSX.Element {
     ]);
   }
 
+  function handleMessagesShown(event: EventMessagingMessagesShown){
+    toast(`onMessagesShown callback - ${JSON.stringify(event)}`);
+    setCallBacks((old) => [
+      {
+        params: arguments,
+        id: "onMessagesShown",
+        key: "onMessagesShown" + old.length,
+      },
+      ...old,
+    ]);
+  }
+
+
   function onChangeKey(key: string) {
     setApiKey(key);
   }
@@ -176,6 +190,7 @@ export default function Page(): JSX.Element {
       onNewConversationButtonClicked={handleOnNewConversationButtonClicked}
       onConversationWithAgentRequested={handleConversationWithAgentRequested}
       onConversationAgentAssigned={handleEventMessagingConversationAgentAssigned}
+      onMessagesShown={handleMessagesShown}
     >
       <main className="main">
         <div className="section-grid">
