@@ -283,8 +283,8 @@ export const ExampleList: React.FC = () => {
             background: "#518e37ff",
           },
           common: {
-            contentScale: 150
-          }
+            contentScale: 150,
+          },
         });
       },
     },

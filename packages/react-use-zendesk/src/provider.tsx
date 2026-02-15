@@ -55,10 +55,14 @@ export const ZendeskProvider: React.FC<
   const onProactiveMessageClickedRef = useRef(onProactiveMessageClicked);
   const onConversationStartedRef = useRef(onConversationStarted);
   const onConversationOpenedRef = useRef(onConversationOpened);
-  const onNewConversationButtonClickedRef = useRef(onNewConversationButtonClicked)
-  const onConversationWithAgentRequestedRef = useRef(onConversationWithAgentRequested)
-  const onConversationAgentAssignedRef = useRef(onConversationAgentAssigned)
-  const onMessagesShownRef = useRef(onMessagesShown)
+  const onNewConversationButtonClickedRef = useRef(
+    onNewConversationButtonClicked,
+  );
+  const onConversationWithAgentRequestedRef = useRef(
+    onConversationWithAgentRequested,
+  );
+  const onConversationAgentAssignedRef = useRef(onConversationAgentAssigned);
+  const onMessagesShownRef = useRef(onMessagesShown);
 
   useLayoutEffect(() => {
     onOpenRef.current = onOpen;
@@ -69,10 +73,11 @@ export const ZendeskProvider: React.FC<
     onProactiveMessageClickedRef.current = onProactiveMessageClicked;
     onConversationStartedRef.current = onConversationStarted;
     onConversationOpenedRef.current = onConversationOpened;
-    onNewConversationButtonClickedRef.current = onNewConversationButtonClicked
-    onConversationWithAgentRequestedRef.current = onConversationWithAgentRequested
-    onConversationAgentAssignedRef.current = onConversationAgentAssigned
-    onMessagesShownRef.current = onMessagesShown
+    onNewConversationButtonClickedRef.current = onNewConversationButtonClicked;
+    onConversationWithAgentRequestedRef.current =
+      onConversationWithAgentRequested;
+    onConversationAgentAssignedRef.current = onConversationAgentAssigned;
+    onMessagesShownRef.current = onMessagesShown;
   });
 
   function registerCallback() {
@@ -175,8 +180,7 @@ export const ZendeskProvider: React.FC<
       "messenger:on",
       "messagesShown",
       function (event: EventMessagingMessagesShown) {
-        !!onMessagesShownRef.current &&
-          onMessagesShownRef.current(event);
+        !!onMessagesShownRef.current && onMessagesShownRef.current(event);
       },
     );
 

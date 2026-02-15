@@ -123,7 +123,9 @@ export default function Page(): JSX.Element {
     ]);
   }
 
-  function handleOnNewConversationButtonClicked(event: EventMessagingNewConversationButtonClicked){
+  function handleOnNewConversationButtonClicked(
+    event: EventMessagingNewConversationButtonClicked,
+  ) {
     toast(`onNewConversationButtonClicked callback - ${JSON.stringify(event)}`);
     setCallBacks((old) => [
       {
@@ -135,8 +137,12 @@ export default function Page(): JSX.Element {
     ]);
   }
 
-  function handleConversationWithAgentRequested(event: EventMessagingConversationWithAgentRequested){
-    toast(`onConversationWithAgentRequested callback - ${JSON.stringify(event)}`);
+  function handleConversationWithAgentRequested(
+    event: EventMessagingConversationWithAgentRequested,
+  ) {
+    toast(
+      `onConversationWithAgentRequested callback - ${JSON.stringify(event)}`,
+    );
     setCallBacks((old) => [
       {
         params: arguments,
@@ -147,7 +153,9 @@ export default function Page(): JSX.Element {
     ]);
   }
 
-  function handleEventMessagingConversationAgentAssigned(event: EventMessagingConversationAgentAssigned){
+  function handleEventMessagingConversationAgentAssigned(
+    event: EventMessagingConversationAgentAssigned,
+  ) {
     toast(`onConversationAgentAssigned callback - ${JSON.stringify(event)}`);
     setCallBacks((old) => [
       {
@@ -159,7 +167,7 @@ export default function Page(): JSX.Element {
     ]);
   }
 
-  function handleMessagesShown(event: EventMessagingMessagesShown){
+  function handleMessagesShown(event: EventMessagingMessagesShown) {
     toast(`onMessagesShown callback - ${JSON.stringify(event)}`);
     setCallBacks((old) => [
       {
@@ -170,7 +178,6 @@ export default function Page(): JSX.Element {
       ...old,
     ]);
   }
-
 
   function onChangeKey(key: string) {
     setApiKey(key);
@@ -189,7 +196,9 @@ export default function Page(): JSX.Element {
       onConversationOpened={handleConversationOpened}
       onNewConversationButtonClicked={handleOnNewConversationButtonClicked}
       onConversationWithAgentRequested={handleConversationWithAgentRequested}
-      onConversationAgentAssigned={handleEventMessagingConversationAgentAssigned}
+      onConversationAgentAssigned={
+        handleEventMessagingConversationAgentAssigned
+      }
       onMessagesShown={handleMessagesShown}
     >
       <main className="main">

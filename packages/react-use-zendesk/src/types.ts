@@ -36,42 +36,43 @@ export type EventMessagingConversationOpened = AbstractMessagingEvent & {
     };
   };
 };
-export type EventMessagingNewConversationButtonClicked = AbstractMessagingEvent & {
-  type: "newConversationButtonClicked",
-  payload: {
-    newConversationSource: string
-  }
-}
-export type EventMessagingConversationWithAgentRequested = AbstractMessagingEvent & {
-  type: "conversationWithAgentRequested",
-  payload: {
-    conversation: {
-      id: string
-    }
-  }
-}
+export type EventMessagingNewConversationButtonClicked =
+  AbstractMessagingEvent & {
+    type: "newConversationButtonClicked";
+    payload: {
+      newConversationSource: string;
+    };
+  };
+export type EventMessagingConversationWithAgentRequested =
+  AbstractMessagingEvent & {
+    type: "conversationWithAgentRequested";
+    payload: {
+      conversation: {
+        id: string;
+      };
+    };
+  };
 export type EventMessagingConversationAgentAssigned = AbstractMessagingEvent & {
-  type: "conversationAgentAssigned",
+  type: "conversationAgentAssigned";
   payload: {
     conversation: {
-      id: string
-    }
-  }
-}
+      id: string;
+    };
+  };
+};
 export type EventMessagingMessagesShown = AbstractMessagingEvent & {
-  type: "messagesShown",
+  type: "messagesShown";
   payload: {
     conversation: {
-      id: string
-    },
+      id: string;
+    };
     messages: Array<{
       id: string;
-      received: string
-      role: string
-    }>
-  }
-}
-
+      received: string;
+      role: string;
+    }>;
+  };
+};
 
 export type ZendeskProviderProps = {
   apiKey: string;
@@ -87,10 +88,16 @@ export type ZendeskProviderProps = {
   ) => void;
   onConversationStarted?: (event: EventMessagingConversationStarted) => void;
   onConversationOpened?: (event: EventMessagingConversationOpened) => void;
-  onNewConversationButtonClicked?: (event: EventMessagingNewConversationButtonClicked) => void
-  onConversationWithAgentRequested?: (event: EventMessagingConversationWithAgentRequested) => void
-  onConversationAgentAssigned?: (event: EventMessagingConversationAgentAssigned) => void
-  onMessagesShown?: (event: EventMessagingMessagesShown) => void
+  onNewConversationButtonClicked?: (
+    event: EventMessagingNewConversationButtonClicked,
+  ) => void;
+  onConversationWithAgentRequested?: (
+    event: EventMessagingConversationWithAgentRequested,
+  ) => void;
+  onConversationAgentAssigned?: (
+    event: EventMessagingConversationAgentAssigned,
+  ) => void;
+  onMessagesShown?: (event: EventMessagingMessagesShown) => void;
 };
 
 export type ZendeskConversationField = {
@@ -121,18 +128,18 @@ export type ZendeskCustomizationTheme = {
     notify?: string;
     onNotify?: string;
     onSecondaryAction?: string;
-  }
+  };
   common?: {
     hideHeader?: boolean;
-    contentScale?: number
-  }
+    contentScale?: number;
+  };
   conversationList?: {
     hideNewConversationButton?: boolean;
     hideHeader?: boolean;
-  }
+  };
   messageLog?: {
-    hideHeader?: boolean
-  }
+    hideHeader?: boolean;
+  };
 };
 
 export type ZendeskConversationOptions = {
@@ -192,4 +199,4 @@ export type ZendeskMethod =
   | "newConversationButtonClicked"
   | "conversationWithAgentRequested"
   | "conversationAgentAssigned"
-  | "messagesShown"
+  | "messagesShown";
