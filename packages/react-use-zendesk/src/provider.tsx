@@ -1,6 +1,7 @@
 "use client";
-import React, { useEffect, useLayoutEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { ZendeskContext } from "./context";
+import { useIsomorphicLayoutEffect } from "./utils";
 import {
   EventMessagingConversationAgentAssigned,
   EventMessagingConversationOpened,
@@ -64,7 +65,7 @@ export const ZendeskProvider: React.FC<
   const onConversationAgentAssignedRef = useRef(onConversationAgentAssigned);
   const onMessagesShownRef = useRef(onMessagesShown);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     onOpenRef.current = onOpen;
     onCloseRef.current = onClose;
     onUnreadMessagesRef.current = onUnreadMessages;
